@@ -57,8 +57,8 @@ export const portfolioData: PortfolioData = {
     title: "B.Tech Student | Software Developer",
     description: "Passionate B.Tech student with a keen interest in software development and creative design. Currently pursuing Computer Science Engineering with a focus on web development and modern technologies.",
     location: "Sonbhadra, Uttar Pradesh",
-    email: "mahendra.dwivedi@email.com",
-    phone: "+91 XXXXX-XXXXX",
+    email: "dwivedimahendra9876@gmail.com",
+    phone: "+91 9580187515",
     profileImage: "/lovable-uploads/7b88955d-8e68-42ad-ad8c-3891fb6682ce.png"
   },
   academics: [
@@ -142,9 +142,9 @@ export const portfolioData: PortfolioData = {
     }
   ],
   contact: {
-    email: "mahendra.dwivedi@email.com",
-    phone: "+91 XXXXX-XXXXX",
-    linkedin: "https://linkedin.com/in/mahendradwivedi",
+    email: "dwivedimahendra9876@gmail.com",
+    phone: "+91 9580187515",
+    linkedin: "https://www.linkedin.com/in/mahendra-dwivedi-a35132249/",
     github: "https://github.com/MahendraDwivedi",
     website: "https://mahendra-portfolio.vercel.app"
   }
