@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { portfolioData } from '@/data/portfolioData';
@@ -57,7 +58,7 @@ const TerminalMode = () => {
     const welcomeMessage = `
 ╔══════════════════════════════════════════════════════════════╗
 ║                     PORTFOLIO TERMINAL v1.0                 ║
-║                      Welcome to Alex's Portfolio            ║
+║                Welcome to Mahendra's Portfolio              ║
 ╚══════════════════════════════════════════════════════════════╝
 
 Type 'help' to see available commands or use the buttons below.
@@ -98,7 +99,7 @@ Type 'help' to see available commands or use the buttons below.
     // Add input line
     setLines(prev => [...prev, { 
       type: 'input', 
-      content: `alex@portfolio:~$ ${cmd}`,
+      content: `mahendra@portfolio:~$ ${cmd}`,
       timestamp 
     }]);
 
@@ -268,7 +269,7 @@ ${portfolioData.contact.website ? `Website: ${portfolioData.contact.website}` : 
           
           {/* Current Input Line */}
           <div className="flex items-center text-yellow-400">
-            <span className="mr-2">alex@portfolio:~$</span>
+            <span className="mr-2">mahendra@portfolio:~$</span>
             <input
               ref={inputRef}
               type="text"

@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -88,7 +87,7 @@ const GUIMode = () => {
   const downloadResume = () => {
     // Create a link to download the resume image
     const link = document.createElement('a');
-    link.href = '/lovable-uploads/865d5468-885c-4181-9a73-109c9652d74b.png';
+    link.href = '/lovable-uploads/7b88955d-8e68-42ad-ad8c-3891fb6682ce.png';
     link.download = 'Mahendra_Kumar_Dwivedi_Resume.png';
     document.body.appendChild(link);
     link.click();
