@@ -20,6 +20,11 @@ export interface PortfolioData {
     technical: string[];
     soft: string[];
     languages: string[];
+    frontend: string[];
+    backend: string[];
+    databases: string[];
+    os: string[];
+    otherTools: string[];
   };
   projects: Array<{
     title: string;
@@ -28,6 +33,7 @@ export interface PortfolioData {
     githubUrl?: string;
     demoUrl?: string;
     image?: string;
+    featured?: boolean;
   }>;
   certifications: Array<{
     name: string;
@@ -42,12 +48,14 @@ export interface PortfolioData {
     description: string[];
     type: 'internship' | 'job' | 'freelance';
   }>;
+  achievements: string[];
   contact: {
     email: string;
     phone: string;
     linkedin: string;
     github: string;
     website?: string;
+    leetcode?: string;
   };
 }
 
@@ -65,19 +73,19 @@ export const portfolioData: PortfolioData = {
     {
       degree: "B.Tech in Computer Science and Engineering",
       institution: "Rajkiya Engineering College, Sonbhadra",
-      year: "2021-2025 (Currently 6th Semester)",
-      grade: "7.5 CGPA",
+      year: "2022-2026 (Currently 6th Semester)",
+      grade: "7.5 CGPA (Current)",
       achievements: ["Consistent Academic Performance", "Active in Technical Events", "Web Development Projects"]
     },
     {
-      degree: "12th Grade (Senior Secondary)",
+      degree: "12th Grade (PCM + CS)",
       institution: "AIMS International School, Gonda",
       year: "2020-2021",
       grade: "89.6%",
       achievements: ["Science Stream Excellence", "Mathematics High Scorer", "Academic Merit"]
     },
     {
-      degree: "10th Grade (Secondary)",
+      degree: "10th Grade",
       institution: "AIMS International School, Gonda",
       year: "2018-2019",
       grade: "92.67%",
@@ -93,24 +101,38 @@ export const portfolioData: PortfolioData = {
       "Problem Solving", "Creative Thinking", "Team Collaboration", "Communication", 
       "Project Management", "Adaptability", "Learning Agility"
     ],
-    languages: ["Hindi (Native)", "English (Fluent)"]
+    languages: ["Hindi (Native)", "English (Fluent)", "Java", "JavaScript", "Python", "C/C++"],
+    frontend: ["React", "Tailwind CSS", "HTML", "CSS"],
+    backend: ["Node.js", "Springboot"],
+    databases: ["MySQL", "MongoDB", "Firebase"],
+    os: ["Debian", "Ubuntu", "Windows"],
+    otherTools: ["Postman", "Git", "Vite"]
   },
   projects: [
     {
       title: "Learnix",
-      description: "A comprehensive learning platform web application designed to provide interactive educational content and resources for students. Features modern UI/UX design with responsive layout.",
-      techStack: ["React", "Node.js", "CSS", "JavaScript", "Vercel"],
+      description: "Learning Management System (LMS) - Built a scalable full-stack LMS using MongoDB, Express.js, React.js, and Node.js, integrated with Clerk for secure authentication and role-based access control (instructor, student). Instructors can create, update, and delete courses with modular content and tracked student progress with dynamic updates and backend sync using Mongoose. Personalized dashboards for students and instructors showing progress, enrolled courses, and performance analytics.",
+      techStack: ["React", "Node.js", "MongoDB", "Express", "Clerk", "Mongoose"],
       githubUrl: "https://github.com/MahendraDwivedi/learnix",
       demoUrl: "https://learnix-three.vercel.app",
-      image: "photo-1498050108023-c5249f4df085"
+      image: "photo-1498050108023-c5249f4df085",
+      featured: true
     },
     {
       title: "Training & Placement Website",
-      description: "A complete web solution for managing campus placements and training resources. Includes student registration, company listings, and placement tracking features.",
-      techStack: ["React", "Node.js", "MongoDB", "Express", "Vercel"],
+      description: "Created a responsive web portal to streamline training and placement activities for students and recruiters. Developed multiple user roles (students, recruiters, verifiers) with customized functionality. Enhanced user experience with dynamic company profile displays and recruitment drive tracking. Integrated a search feature for finding companies, roles, and recruitment events.",
+      techStack: ["React", "Node.js", "MongoDB", "Express", "HTML", "CSS", "JavaScript"],
       githubUrl: "https://github.com/MahendraDwivedi/training-placement",
       demoUrl: "https://training-placement-eta.vercel.app",
-      image: "photo-1486312338219-ce68d2c6f44d"
+      image: "photo-1486312338219-ce68d2c6f44d",
+      featured: true
+    },
+    {
+      title: "Maleria Tracker",
+      description: "Real-time malaria tracking and data visualization for early detection and prevention. Developed a full-stack web application using React (frontend), Express.js (backend), and MongoDB (database). Designed a state-and district-level tracking system for malaria cases, including active cases, total cases, and recoveries. Built a hospital-based data entry system in which hospitals update case details in real time. Ensured secure API communication and authentication for authorized hospital data entry.",
+      techStack: ["React", "Express.js", "MongoDB", "Node.js", "Data Visualization"],
+      githubUrl: "https://github.com/MahendraDwivedi/maleria-tracker",
+      image: "photo-1576091160399-112ba8d25d1f"
     }
   ],
   certifications: [
@@ -129,6 +151,27 @@ export const portfolioData: PortfolioData = {
   ],
   experience: [
     {
+      title: "Core Team Member",
+      company: "Google Developer Group",
+      duration: "Jul 2024 - Present",
+      description: [
+        "Conducted sessions on problem solving techniques, algorithm optimization, and coding best practices",
+        "Organized several virtual contests and hackathons",
+        "Helping beginners understand complex topics"
+      ],
+      type: "job"
+    },
+    {
+      title: "College Website Maintenance Team",
+      company: "Rajkiya Engineering College",
+      duration: "Aug 2024 - Present",
+      description: [
+        "Learned the fundamentals of Version Control Like Git and Github and about Real-World Project Management",
+        "Learned to troubleshoot and resolve issues related to user experience, website functionality"
+      ],
+      type: "job"
+    },
+    {
       title: "Web Development Projects",
       company: "Personal Projects",
       duration: "2022 - Present",
@@ -141,11 +184,17 @@ export const portfolioData: PortfolioData = {
       type: "freelance"
     }
   ],
+  achievements: [
+    "Achieved the leetcode rating of 1636",
+    "Secured a contest rank of 1448 on Leetcode weekly contest 446",
+    "Solved over 1000 problems on various coding platforms such as Leetcode, GFG, Coding Ninjas etc."
+  ],
   contact: {
     email: "dwivedimahendra9876@gmail.com",
     phone: "+91 9580187515",
     linkedin: "https://www.linkedin.com/in/mahendra-dwivedi-a35132249/",
     github: "https://github.com/MahendraDwivedi",
-    website: "https://mahendra-portfolio.vercel.app"
+    website: "https://mahendra-portfolio.vercel.app",
+    leetcode: "https://leetcode.com/u/MahendraDwivedi/"
   }
 };
