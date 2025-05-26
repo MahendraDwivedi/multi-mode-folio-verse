@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Download, Mail, Github, Linkedin, ExternalLink, Phone, MapPin, MessageCircle, Briefcase } from 'lucide-react';
+import { Download, Mail, Github, Linkedin, ExternalLink, Phone, MapPin, MessageCircle, Briefcase, Code } from 'lucide-react';
 import { portfolioData } from '@/data/portfolioData';
 
 const WebMode = () => {

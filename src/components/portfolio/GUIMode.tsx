@@ -1,92 +1,82 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Minus, Square, X, Folder, User, GraduationCap, Code, FolderOpen, Award, Briefcase, Mail, Download, MessageCircle, ExternalLink } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Download, Mail, Github, Linkedin, ExternalLink, Phone, MapPin, MessageCircle, Briefcase, Code, X, Minus, Square } from 'lucide-react';
 import { portfolioData } from '@/data/portfolioData';
 
-type WindowType = 'about' | 'academics' | 'skills' | 'projects' | 'certifications' | 'experience' | 'contact' | 'achievements' | 'hire';
-
 interface WindowState {
-  id: string;
-  type: WindowType;
-  title: string;
-  isMinimized: boolean;
   isMaximized: boolean;
-  position: { x: number; y: number };
-  size: { width: number; height: number };
-  zIndex: number;
+  isMinimized: boolean;
+  isOpen: boolean;
 }
 
+type WindowType = 'about' | 'skills' | 'projects' | 'experience' | 'academics' | 'certifications' | 'hire' | 'contact';
+
 const GUIMode = () => {
-  const [windows, setWindows] = useState<WindowState[]>([
-    {
-      id: 'about-1',
-      type: 'about',
-      title: 'About Me',
-      isMinimized: false,
-      isMaximized: false,
-      position: { x: 100, y: 100 },
-      size: { width: 600, height: 400 },
-      zIndex: 1
-    }
-  ]);
+  const [windowStates, setWindowStates] = useState<Record<WindowType, WindowState>>({
+    about: { isMaximized: false, isMinimized: false, isOpen: true },
+    skills: { isMaximized: false, isMinimized: false, isOpen: false },
+    projects: { isMaximized: false, isMinimized: false, isOpen: false },
+    experience: { isMaximized: false, isMinimized: false, isOpen: false },
+    academics: { isMaximized: false, isMinimized: false, isOpen: false },
+    certifications: { isMaximized: false, isMinimized: false, isOpen: false },
+    hire: { isMaximized: false, isMinimized: false, isOpen: false },
+    contact: { isMaximized: false, isMinimized: false, isOpen: false }
+  });
 
-  const [nextZIndex, setNextZIndex] = useState(2);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
-  const windowIcons = {
-    about: User,
-    academics: GraduationCap,
-    skills: Code,
-    projects: FolderOpen,
-    certifications: Award,
-    experience: Briefcase,
-    contact: Mail,
-    achievements: Award,
-    hire: Briefcase
+  const openWindow = (windowType: WindowType) => {
+    setWindowStates(prev => ({
+      ...prev,
+      [windowType]: { isMaximized: false, isMinimized: false, isOpen: true }
+    }));
   };
 
-  const openWindow = (type: WindowType, title: string) => {
-    // Close all existing windows and open only the new one
-    const newWindow: WindowState = {
-      id: `${type}-${Date.now()}`,
-      type,
-      title,
-      isMinimized: false,
-      isMaximized: false,
-      position: { x: 150, y: 150 },
-      size: { width: 700, height: 500 },
-      zIndex: nextZIndex
-    };
-
-    setWindows([newWindow]);
-    setNextZIndex(nextZIndex + 1);
+  const closeWindow = (windowType: WindowType) => {
+    setWindowStates(prev => ({
+      ...prev,
+      [windowType]: { ...prev[windowType], isOpen: false }
+    }));
   };
 
-  const closeWindow = (id: string) => {
-    setWindows(windows.filter(w => w.id !== id));
+  const maximizeWindow = (windowType: WindowType) => {
+    setWindowStates(prev => ({
+      ...prev,
+      [windowType]: { 
+        ...prev[windowType], 
+        isMaximized: !prev[windowType].isMaximized,
+        isMinimized: false 
+      }
+    }));
   };
 
-  const minimizeWindow = (id: string) => {
-    setWindows(windows.map(w => 
-      w.id === id ? { ...w, isMinimized: !w.isMinimized } : w
-    ));
+  const minimizeWindow = (windowType: WindowType) => {
+    setWindowStates(prev => ({
+      ...prev,
+      [windowType]: { 
+        ...prev[windowType], 
+        isMinimized: !prev[windowType].isMinimized 
+      }
+    }));
   };
 
-  const maximizeWindow = (id: string) => {
-    setWindows(windows.map(w => 
-      w.id === id ? { ...w, isMaximized: !w.isMaximized } : w
-    ));
-  };
-
-  const bringToFront = (id: string) => {
-    setWindows(windows.map(w => 
-      w.id === id ? { ...w, zIndex: nextZIndex } : w
-    ));
-    setNextZIndex(nextZIndex + 1);
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Form submitted:', formData);
+    alert('Thank you for your message! I\'ll get back to you soon.');
+    setFormData({ name: '', email: '', message: '' });
   };
 
   const downloadResume = () => {
-    // Create a link to download the resume image
     const link = document.createElement('a');
     link.href = '/lovable-uploads/7b88955d-8e68-42ad-ad8c-3891fb6682ce.png';
     link.download = 'Mahendra_Kumar_Dwivedi_Resume.png';
@@ -100,503 +90,426 @@ const GUIMode = () => {
     window.open(`https://wa.me/919580187515?text=${message}`, '_blank');
   };
 
-  const renderWindowContent = (window: WindowState) => {
-    switch (window.type) {
-      case 'about':
-        return (
-          <div className="p-6 space-y-4">
-            <div className="flex items-center gap-4">
-              {portfolioData.about.profileImage ? (
-                <img 
-                  src={portfolioData.about.profileImage} 
-                  alt={portfolioData.about.name}
-                  className="w-16 h-16 rounded-full object-cover border-2 border-primary/20"
-                />
-              ) : (
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
-                  {portfolioData.about.name.split(' ').map(n => n[0]).join('')}
-                </div>
-              )}
-              <div>
-                <h2 className="text-2xl font-bold text-foreground">{portfolioData.about.name}</h2>
-                <p className="text-muted-foreground">{portfolioData.about.title}</p>
-              </div>
-            </div>
-            <p className="text-foreground leading-relaxed">{portfolioData.about.description}</p>
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <span className="font-medium">Location:</span> {portfolioData.about.location}
-              </div>
-              <div>
-                <span className="font-medium">Email:</span> {portfolioData.about.email}
-              </div>
-              <div>
-                <span className="font-medium">Phone:</span> {portfolioData.about.phone}
-              </div>
-              <div>
-                <span className="font-medium">LeetCode Rating:</span> 1636
-              </div>
-            </div>
-            <div className="flex gap-2">
-              <Button onClick={downloadResume} className="flex items-center gap-2">
-                <Download className="w-4 h-4" />
-                Download Resume
-              </Button>
-              <Button onClick={() => openWindow('hire', 'Hire Me')} variant="outline" className="flex items-center gap-2">
-                <Briefcase className="w-4 h-4" />
-                Hire Me
-              </Button>
-            </div>
+  const WindowFrame = ({ 
+    title, 
+    children, 
+    windowType, 
+    className = "" 
+  }: { 
+    title: string; 
+    children: React.ReactNode; 
+    windowType: WindowType; 
+    className?: string; 
+  }) => {
+    const state = windowStates[windowType];
+    
+    if (!state.isOpen) return null;
+
+    return (
+      <div 
+        className={`
+          bg-white border-2 border-gray-400 shadow-lg
+          ${state.isMaximized ? 'fixed inset-4 z-50' : 'relative'}
+          ${state.isMinimized ? 'h-8' : 'min-h-64'}
+          ${className}
+        `}
+      >
+        <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-2 py-1 flex items-center justify-between">
+          <span className="font-bold text-sm">{title}</span>
+          <div className="flex items-center gap-1">
+            <Button
+              size="sm"
+              variant="ghost"
+              className="w-6 h-6 p-0 text-white hover:bg-white/20"
+              onClick={() => minimizeWindow(windowType)}
+            >
+              <Minus className="w-3 h-3" />
+            </Button>
+            <Button
+              size="sm"
+              variant="ghost"
+              className="w-6 h-6 p-0 text-white hover:bg-white/20"
+              onClick={() => maximizeWindow(windowType)}
+            >
+              <Square className="w-3 h-3" />
+            </Button>
+            <Button
+              size="sm"
+              variant="ghost"
+              className="w-6 h-6 p-0 text-white hover:bg-white/20"
+              onClick={() => closeWindow(windowType)}
+            >
+              <X className="w-3 h-3" />
+            </Button>
           </div>
-        );
-      
-      case 'hire':
-        return (
-          <div className="p-6 space-y-6">
-            <h2 className="text-xl font-bold text-foreground mb-4">Hire Me</h2>
-            
-            <div className="grid gap-4">
-              <Card className="p-4">
-                <h3 className="font-semibold text-foreground mb-2">Backend Developer</h3>
-                <p className="text-muted-foreground text-sm mb-2">
-                  Specialized in Node.js, Express.js, MongoDB, PostgreSQL, and RESTful APIs
-                </p>
-                <p className="text-sm font-medium text-green-600">Minimum Stipend: ₹15,000/month</p>
-              </Card>
-
-              <Card className="p-4">
-                <h3 className="font-semibold text-foreground mb-2">Frontend Developer</h3>
-                <p className="text-muted-foreground text-sm mb-2">
-                  Expert in React.js, Next.js, TypeScript, Tailwind CSS, and modern UI/UX
-                </p>
-                <p className="text-sm font-medium text-green-600">Minimum Stipend: ₹15,000/month</p>
-              </Card>
-
-              <Card className="p-4">
-                <h3 className="font-semibold text-foreground mb-2">Full Stack Developer</h3>
-                <p className="text-muted-foreground text-sm mb-2">
-                  Complete web development solutions with MERN/PERN stack expertise
-                </p>
-                <p className="text-sm font-medium text-green-600">Minimum Stipend: ₹15,000/month</p>
-              </Card>
-
-              <Card className="p-4">
-                <h3 className="font-semibold text-foreground mb-2">Java Developer</h3>
-                <p className="text-muted-foreground text-sm mb-2">
-                  Strong foundation in Core Java, Spring Boot, and enterprise applications
-                </p>
-                <p className="text-sm font-medium text-green-600">Minimum Stipend: ₹15,000/month</p>
-              </Card>
-            </div>
-
-            <div className="border-t pt-4">
-              <h3 className="font-semibold text-foreground mb-3">Get in Touch</h3>
-              <div className="flex gap-2">
-                <Button onClick={openWhatsApp} className="flex items-center gap-2 bg-green-600 hover:bg-green-700">
-                  <MessageCircle className="w-4 h-4" />
-                  Chat on WhatsApp
-                </Button>
-                <Button onClick={() => openWindow('contact', 'Contact')} variant="outline" className="flex items-center gap-2">
-                  <Mail className="w-4 h-4" />
-                  Contact Details
-                </Button>
-              </div>
-            </div>
+        </div>
+        {!state.isMinimized && (
+          <div className="p-4 overflow-auto max-h-96">
+            {children}
           </div>
-        );
-
-      case 'academics':
-        return (
-          <div className="p-6 space-y-4">
-            <div className="flex justify-between items-center">
-              <h2 className="text-xl font-bold text-foreground mb-4">Academic Background</h2>
-              <Button onClick={() => openWindow('hire', 'Hire Me')} size="sm" variant="outline" className="flex items-center gap-1">
-                <Briefcase className="w-3 h-3" />
-                Hire Me
-              </Button>
-            </div>
-            <div className="space-y-4 max-h-80 overflow-y-auto">
-              {portfolioData.academics.map((edu, index) => (
-                <Card key={index} className="p-4">
-                  <h3 className="font-semibold text-foreground">{edu.degree}</h3>
-                  <p className="text-muted-foreground">{edu.institution} • {edu.year}</p>
-                  <p className="text-sm font-medium text-foreground mt-1">Grade: {edu.grade}</p>
-                  <ul className="list-disc list-inside text-sm text-muted-foreground mt-2">
-                    {edu.achievements.map((achievement, i) => (
-                      <li key={i}>{achievement}</li>
-                    ))}
-                  </ul>
-                </Card>
-              ))}
-            </div>
-          </div>
-        );
-
-      case 'skills':
-        return (
-          <div className="p-6 space-y-6 max-h-96 overflow-y-auto">
-            <div className="flex justify-between items-center">
-              <h2 className="text-xl font-bold text-foreground mb-4">Skills & Expertise</h2>
-              <Button onClick={() => openWindow('hire', 'Hire Me')} size="sm" variant="outline" className="flex items-center gap-1">
-                <Briefcase className="w-3 h-3" />
-                Hire Me
-              </Button>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold text-foreground mb-2">Frontend</h3>
-              <div className="flex flex-wrap gap-2">
-                {portfolioData.skills.frontend.map((skill, index) => (
-                  <span key={index} className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-foreground mb-2">Backend</h3>
-              <div className="flex flex-wrap gap-2">
-                {portfolioData.skills.backend.map((skill, index) => (
-                  <span key={index} className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-foreground mb-2">Databases</h3>
-              <div className="flex flex-wrap gap-2">
-                {portfolioData.skills.databases.map((skill, index) => (
-                  <span key={index} className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-foreground mb-2">Programming Languages</h3>
-              <div className="flex flex-wrap gap-2">
-                {portfolioData.skills.languages.slice(2).map((lang, index) => (
-                  <span key={index} className="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm">
-                    {lang}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-foreground mb-2">Other Tools</h3>
-              <div className="flex flex-wrap gap-2">
-                {portfolioData.skills.otherTools.map((tool, index) => (
-                  <span key={index} className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">
-                    {tool}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        );
-
-      case 'projects':
-        return (
-          <div className="p-6 space-y-4">
-            <div className="flex justify-between items-center">
-              <h2 className="text-xl font-bold text-foreground mb-4">Projects</h2>
-              <Button onClick={() => openWindow('hire', 'Hire Me')} size="sm" variant="outline" className="flex items-center gap-1">
-                <Briefcase className="w-3 h-3" />
-                Hire Me
-              </Button>
-            </div>
-            <div className="space-y-4 max-h-80 overflow-y-auto">
-              {portfolioData.projects.map((project, index) => (
-                <Card key={index} className="p-4">
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-semibold text-foreground">{project.title}</h3>
-                    {project.featured && (
-                      <span className="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs">Featured</span>
-                    )}
-                  </div>
-                  <p className="text-muted-foreground text-sm mt-1">{project.description}</p>
-                  <div className="flex flex-wrap gap-1 mt-2">
-                    {project.techStack.map((tech, i) => (
-                      <span key={i} className="px-2 py-1 bg-primary/10 text-primary rounded text-xs">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex gap-2 mt-3">
-                    {project.githubUrl && (
-                      <Button size="sm" variant="outline" className="text-xs" onClick={() => window.open(project.githubUrl, '_blank')}>
-                        GitHub
-                      </Button>
-                    )}
-                    {project.demoUrl && (
-                      <Button size="sm" variant="outline" className="text-xs" onClick={() => window.open(project.demoUrl, '_blank')}>
-                        <ExternalLink className="w-3 h-3 mr-1" />
-                        Live Demo
-                      </Button>
-                    )}
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-        );
-
-      case 'achievements':
-        return (
-          <div className="p-6 space-y-4">
-            <div className="flex justify-between items-center">
-              <h2 className="text-xl font-bold text-foreground mb-4">Achievements</h2>
-              <Button onClick={() => openWindow('hire', 'Hire Me')} size="sm" variant="outline" className="flex items-center gap-1">
-                <Briefcase className="w-3 h-3" />
-                Hire Me
-              </Button>
-            </div>
-            <div className="space-y-3">
-              {portfolioData.achievements.map((achievement, index) => (
-                <Card key={index} className="p-4">
-                  <p className="text-foreground">{achievement}</p>
-                </Card>
-              ))}
-            </div>
-          </div>
-        );
-
-      case 'certifications':
-        return (
-          <div className="p-6 space-y-4">
-            <div className="flex justify-between items-center">
-              <h2 className="text-xl font-bold text-foreground mb-4">Certifications</h2>
-              <Button onClick={() => openWindow('hire', 'Hire Me')} size="sm" variant="outline" className="flex items-center gap-1">
-                <Briefcase className="w-3 h-3" />
-                Hire Me
-              </Button>
-            </div>
-            {portfolioData.certifications.map((cert, index) => (
-              <Card key={index} className="p-4">
-                <h3 className="font-semibold text-foreground">{cert.name}</h3>
-                <p className="text-muted-foreground">{cert.issuer} • {cert.year}</p>
-                {cert.credentialId && (
-                  <p className="text-sm text-muted-foreground mt-1">ID: {cert.credentialId}</p>
-                )}
-              </Card>
-            ))}
-          </div>
-        );
-
-      case 'experience':
-        return (
-          <div className="p-6 space-y-4">
-            <div className="flex justify-between items-center">
-              <h2 className="text-xl font-bold text-foreground mb-4">Experience</h2>
-              <Button onClick={() => openWindow('hire', 'Hire Me')} size="sm" variant="outline" className="flex items-center gap-1">
-                <Briefcase className="w-3 h-3" />
-                Hire Me
-              </Button>
-            </div>
-            <div className="space-y-4 max-h-80 overflow-y-auto">
-              {portfolioData.experience.map((exp, index) => (
-                <Card key={index} className="p-4">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h3 className="font-semibold text-foreground">{exp.title}</h3>
-                      <p className="text-muted-foreground">{exp.company}</p>
-                    </div>
-                    <span className="text-sm text-muted-foreground">{exp.duration}</span>
-                  </div>
-                  <ul className="list-disc list-inside text-sm text-muted-foreground mt-2 space-y-1">
-                    {exp.description.map((item, i) => (
-                      <li key={i}>{item}</li>
-                    ))}
-                  </ul>
-                </Card>
-              ))}
-            </div>
-          </div>
-        );
-
-      case 'contact':
-        return (
-          <div className="p-6 space-y-4">
-            <div className="flex justify-between items-center">
-              <h2 className="text-xl font-bold text-foreground mb-4">Contact Information</h2>
-              <Button onClick={() => openWindow('hire', 'Hire Me')} size="sm" variant="outline" className="flex items-center gap-1">
-                <Briefcase className="w-3 h-3" />
-                Hire Me
-              </Button>
-            </div>
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-primary" />
-                <span className="text-foreground">{portfolioData.contact.email}</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="w-5 h-5 text-primary text-center">📱</span>
-                <span className="text-foreground">{portfolioData.contact.phone}</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="w-5 h-5 text-primary text-center">💼</span>
-                <a href={portfolioData.contact.linkedin} className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
-                  LinkedIn Profile
-                </a>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="w-5 h-5 text-primary text-center">🐙</span>
-                <a href={portfolioData.contact.github} className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
-                  GitHub Profile
-                </a>
-              </div>
-              {portfolioData.contact.leetcode && (
-                <div className="flex items-center gap-3">
-                  <span className="w-5 h-5 text-primary text-center">💻</span>
-                  <a href={portfolioData.contact.leetcode} className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
-                    LeetCode Profile
-                  </a>
-                </div>
-              )}
-            </div>
-            <div className="border-t pt-4">
-              <Button onClick={openWhatsApp} className="flex items-center gap-2 bg-green-600 hover:bg-green-700">
-                <MessageCircle className="w-4 h-4" />
-                Chat on WhatsApp
-              </Button>
-            </div>
-          </div>
-        );
-
-      default:
-        return <div className="p-6">Content not found</div>;
-    }
+        )}
+      </div>
+    );
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-teal-400 to-blue-600 p-4">
       {/* Desktop Icons */}
-      <div className="absolute left-6 top-6 space-y-4">
-        {Object.entries(windowIcons).map(([type, Icon]) => (
+      <div className="grid grid-cols-6 gap-4 mb-4">
+        {[
+          { type: 'about' as WindowType, icon: '👤', label: 'About' },
+          { type: 'skills' as WindowType, icon: '🛠️', label: 'Skills' },
+          { type: 'projects' as WindowType, icon: '💼', label: 'Projects' },
+          { type: 'experience' as WindowType, icon: '📋', label: 'Experience' },
+          { type: 'academics' as WindowType, icon: '🎓', label: 'Education' },
+          { type: 'certifications' as WindowType, icon: '📜', label: 'Certifications' },
+          { type: 'hire' as WindowType, icon: '💰', label: 'Hire Me' },
+          { type: 'contact' as WindowType, icon: '📧', label: 'Contact' }
+        ].map((item) => (
           <div
-            key={type}
-            className="flex flex-col items-center cursor-pointer hover:bg-white/10 p-2 rounded-lg transition-colors"
-            onClick={() => openWindow(type as WindowType, type === 'hire' ? 'Hire Me' : type.charAt(0).toUpperCase() + type.slice(1))}
+            key={item.type}
+            className="flex flex-col items-center cursor-pointer group"
+            onDoubleClick={() => openWindow(item.type)}
           >
-            <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-1">
-              <Icon className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-2xl group-hover:bg-blue-200 transition-colors">
+              {item.icon}
             </div>
-            <span className="text-xs text-gray-700 dark:text-gray-300 capitalize">{type === 'hire' ? 'Hire Me' : type}</span>
+            <span className="text-white text-xs mt-1 text-center font-medium">{item.label}</span>
           </div>
         ))}
       </div>
 
-      {/* Floating Buttons */}
-      <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-2">
-        <Button
-          onClick={openWhatsApp}
-          className="rounded-full w-14 h-14 bg-green-600 hover:bg-green-700 shadow-lg"
-          size="lg"
-        >
-          <MessageCircle className="w-6 h-6" />
-        </Button>
-        <Button
-          onClick={downloadResume}
-          className="rounded-full w-14 h-14 bg-primary hover:bg-primary/90 shadow-lg"
-          size="lg"
-        >
-          <Download className="w-6 h-6" />
-        </Button>
-      </div>
-
       {/* Taskbar */}
-      <div className="absolute bottom-0 left-0 right-0 h-12 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-t border-gray-200 dark:border-gray-700 flex items-center px-4 gap-2">
-        <Folder className="w-6 h-6 text-gray-600 dark:text-gray-400" />
-        {windows.filter(w => !w.isMinimized).map((window) => {
-          const Icon = windowIcons[window.type];
-          return (
-            <Button
-              key={window.id}
-              variant="ghost"
-              size="sm"
-              className="flex items-center gap-2"
-              onClick={() => bringToFront(window.id)}
-            >
-              <Icon className="w-4 h-4" />
-              {window.title}
-            </Button>
-          );
-        })}
+      <div className="fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-2 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Button
+            size="sm"
+            className="bg-blue-600 hover:bg-blue-700"
+            onClick={downloadResume}
+          >
+            <Download className="w-4 h-4 mr-1" />
+            Resume
+          </Button>
+        </div>
+        <div className="flex items-center gap-1">
+          {Object.entries(windowStates)
+            .filter(([, state]) => state.isOpen)
+            .map(([windowType]) => (
+              <Button
+                key={windowType}
+                size="sm"
+                variant="outline"
+                className="text-xs"
+                onClick={() => {
+                  if (windowStates[windowType as WindowType].isMinimized) {
+                    minimizeWindow(windowType as WindowType);
+                  }
+                }}
+              >
+                {windowType.charAt(0).toUpperCase() + windowType.slice(1)}
+              </Button>
+            ))}
+        </div>
+        <div className="text-xs">
+          {new Date().toLocaleTimeString()}
+        </div>
       </div>
 
       {/* Windows */}
-      {windows.map((window) => (
-        <div
-          key={window.id}
-          className={`absolute gui-window border border-gray-300 dark:border-gray-600 rounded-lg shadow-2xl transition-all ${
-            window.isMinimized ? 'hidden' : ''
-          } ${window.isMaximized ? 'inset-4' : ''}`}
-          style={{
-            left: window.isMaximized ? 0 : window.position.x,
-            top: window.isMaximized ? 0 : window.position.y,
-            width: window.isMaximized ? 'calc(100vw - 32px)' : window.size.width,
-            height: window.isMaximized ? 'calc(100vh - 80px)' : window.size.height,
-            zIndex: window.zIndex,
-          }}
-          onClick={() => bringToFront(window.id)}
-        >
-          {/* Window Header */}
-          <div className="h-8 bg-gray-100 dark:bg-gray-700 rounded-t-lg flex items-center justify-between px-4 border-b border-gray-200 dark:border-gray-600">
-            <div className="flex items-center gap-2">
-              {(() => {
-                const Icon = windowIcons[window.type];
-                return <Icon className="w-4 h-4 text-gray-600 dark:text-gray-400" />;
-              })()}
-              <span className="text-sm text-gray-700 dark:text-gray-300">{window.title}</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <Button
-                size="sm"
-                variant="ghost"
-                className="w-6 h-6 p-0 hover:bg-yellow-500"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  minimizeWindow(window.id);
-                }}
-              >
-                <Minus className="w-3 h-3" />
-              </Button>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="w-6 h-6 p-0 hover:bg-green-500"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  maximizeWindow(window.id);
-                }}
-              >
-                <Square className="w-3 h-3" />
-              </Button>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="w-6 h-6 p-0 hover:bg-red-500"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  closeWindow(window.id);
-                }}
-              >
-                <X className="w-3 h-3" />
-              </Button>
+      <div className="space-y-4">
+        {/* About Window */}
+        <WindowFrame title="About - Mahendra Kumar Dwivedi" windowType="about" className="max-w-2xl">
+          <div className="text-center">
+            {portfolioData.about.profileImage ? (
+              <img 
+                src={portfolioData.about.profileImage} 
+                alt={portfolioData.about.name}
+                className="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-2 border-blue-500"
+              />
+            ) : (
+              <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">
+                {portfolioData.about.name.split(' ').map(n => n[0]).join('')}
+              </div>
+            )}
+            <h2 className="text-xl font-bold text-gray-800 mb-2">{portfolioData.about.name}</h2>
+            <p className="text-blue-600 font-medium mb-3">{portfolioData.about.title}</p>
+            <p className="text-gray-600 text-sm leading-relaxed">{portfolioData.about.description}</p>
+            <div className="mt-4 flex items-center justify-center gap-4 text-sm text-gray-600">
+              <div className="flex items-center gap-1">
+                <MapPin className="w-4 h-4" />
+                {portfolioData.about.location}
+              </div>
+              <div className="flex items-center gap-1">
+                <Mail className="w-4 h-4" />
+                {portfolioData.about.email}
+              </div>
             </div>
           </div>
+        </WindowFrame>
 
-          {/* Window Content */}
-          <div className="h-full pb-8 overflow-hidden bg-white dark:bg-gray-800 rounded-b-lg">
-            {renderWindowContent(window)}
+        {/* Skills Window */}
+        <WindowFrame title="Skills & Expertise" windowType="skills" className="max-w-3xl">
+          <div className="grid md:grid-cols-3 gap-4">
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">Technical Skills</h3>
+              <div className="flex flex-wrap gap-1">
+                {portfolioData.skills.technical.map((skill, index) => (
+                  <Badge key={index} className="bg-blue-100 text-blue-800 text-xs">
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">Soft Skills</h3>
+              <div className="flex flex-wrap gap-1">
+                {portfolioData.skills.soft.map((skill, index) => (
+                  <Badge key={index} variant="secondary" className="text-xs">
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">Languages</h3>
+              <div className="flex flex-wrap gap-1">
+                {portfolioData.skills.languages.map((lang, index) => (
+                  <Badge key={index} variant="outline" className="text-xs">
+                    {lang}
+                  </Badge>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      ))}
+        </WindowFrame>
+
+        {/* Projects Window */}
+        <WindowFrame title="Featured Projects" windowType="projects" className="max-w-4xl">
+          <div className="grid md:grid-cols-2 gap-4">
+            {portfolioData.projects.slice(0, 4).map((project, index) => (
+              <Card key={index} className="p-4">
+                <h3 className="font-semibold text-gray-800 mb-2">{project.title}</h3>
+                <p className="text-gray-600 text-sm mb-3">{project.description}</p>
+                <div className="flex flex-wrap gap-1 mb-3">
+                  {project.techStack.map((tech, i) => (
+                    <Badge key={i} variant="outline" className="text-xs">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+                <div className="flex gap-2">
+                  {project.githubUrl && (
+                    <Button size="sm" variant="outline" onClick={() => window.open(project.githubUrl, '_blank')}>
+                      <Github className="w-3 h-3 mr-1" />
+                      Code
+                    </Button>
+                  )}
+                  {project.demoUrl && (
+                    <Button size="sm" variant="outline" onClick={() => window.open(project.demoUrl, '_blank')}>
+                      <ExternalLink className="w-3 h-3 mr-1" />
+                      Demo
+                    </Button>
+                  )}
+                </div>
+              </Card>
+            ))}
+          </div>
+        </WindowFrame>
+
+        {/* Experience Window */}
+        <WindowFrame title="Professional Experience" windowType="experience" className="max-w-3xl">
+          <div className="space-y-4">
+            {portfolioData.experience.map((exp, index) => (
+              <div key={index} className="border-l-4 border-blue-500 pl-4">
+                <h3 className="font-semibold text-gray-800">{exp.title}</h3>
+                <p className="text-blue-600 font-medium">{exp.company}</p>
+                <p className="text-gray-600 text-sm">{exp.duration}</p>
+                <Badge variant="outline" className="mt-1">{exp.type}</Badge>
+                <ul className="mt-2 space-y-1">
+                  {exp.description.map((item, i) => (
+                    <li key={i} className="text-sm text-gray-600 flex items-start gap-2">
+                      <span className="w-1 h-1 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </WindowFrame>
+
+        {/* Education Window */}
+        <WindowFrame title="Educational Background" windowType="academics" className="max-w-3xl">
+          <div className="space-y-4">
+            {portfolioData.academics.map((edu, index) => (
+              <Card key={index} className="p-4">
+                <div className="flex justify-between items-start mb-2">
+                  <div>
+                    <h3 className="font-semibold text-gray-800">{edu.degree}</h3>
+                    <p className="text-blue-600">{edu.institution}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-gray-600">{edu.year}</p>
+                    <p className="font-medium text-gray-800">{edu.grade}</p>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-1">
+                  {edu.achievements.map((achievement, i) => (
+                    <Badge key={i} variant="secondary" className="text-xs">{achievement}</Badge>
+                  ))}
+                </div>
+              </Card>
+            ))}
+          </div>
+        </WindowFrame>
+
+        {/* Certifications Window */}
+        <WindowFrame title="Certifications & Achievements" windowType="certifications" className="max-w-3xl">
+          <div className="grid md:grid-cols-2 gap-4">
+            {portfolioData.certifications.map((cert, index) => (
+              <Card key={index} className="p-4 text-center">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="text-blue-600 font-bold">{cert.name.charAt(0)}</span>
+                </div>
+                <h3 className="font-semibold text-gray-800 mb-1">{cert.name}</h3>
+                <p className="text-blue-600 mb-1">{cert.issuer}</p>
+                <p className="text-sm text-gray-600">{cert.year}</p>
+                {cert.credentialId && (
+                  <p className="text-xs text-gray-500 mt-1">ID: {cert.credentialId}</p>
+                )}
+              </Card>
+            ))}
+          </div>
+        </WindowFrame>
+
+        {/* Hire Me Window */}
+        <WindowFrame title="Hire Me - Available Positions" windowType="hire" className="max-w-4xl">
+          <div className="space-y-4">
+            <div className="grid md:grid-cols-2 gap-4">
+              <Card className="p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <Briefcase className="w-6 h-6 text-blue-600" />
+                  <h3 className="font-semibold text-gray-800">Backend Developer</h3>
+                </div>
+                <p className="text-gray-600 text-sm mb-3">
+                  Specialized in Node.js, Express.js, MongoDB, PostgreSQL, and RESTful APIs
+                </p>
+                <p className="text-green-600 font-medium">Minimum Stipend: ₹15,000/month</p>
+              </Card>
+
+              <Card className="p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <Code className="w-6 h-6 text-blue-600" />
+                  <h3 className="font-semibold text-gray-800">Frontend Developer</h3>
+                </div>
+                <p className="text-gray-600 text-sm mb-3">
+                  Expert in React.js, Next.js, TypeScript, Tailwind CSS, and modern UI/UX
+                </p>
+                <p className="text-green-600 font-medium">Minimum Stipend: ₹15,000/month</p>
+              </Card>
+
+              <Card className="p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <ExternalLink className="w-6 h-6 text-blue-600" />
+                  <h3 className="font-semibold text-gray-800">Full Stack Developer</h3>
+                </div>
+                <p className="text-gray-600 text-sm mb-3">
+                  Complete web development solutions with MERN/PERN stack expertise
+                </p>
+                <p className="text-green-600 font-medium">Minimum Stipend: ₹15,000/month</p>
+              </Card>
+
+              <Card className="p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <Github className="w-6 h-6 text-blue-600" />
+                  <h3 className="font-semibold text-gray-800">Java Developer</h3>
+                </div>
+                <p className="text-gray-600 text-sm mb-3">
+                  Strong foundation in Core Java, Spring Boot, and enterprise applications
+                </p>
+                <p className="text-green-600 font-medium">Minimum Stipend: ₹15,000/month</p>
+              </Card>
+            </div>
+
+            <div className="text-center pt-4 border-t">
+              <h3 className="font-semibold text-gray-800 mb-3">Ready to start working together?</h3>
+              <div className="flex justify-center gap-3">
+                <Button onClick={openWhatsApp} className="bg-green-600 hover:bg-green-700">
+                  <MessageCircle className="w-4 h-4 mr-1" />
+                  Chat on WhatsApp
+                </Button>
+                <Button onClick={() => openWindow('contact')} variant="outline">
+                  <Mail className="w-4 h-4 mr-1" />
+                  Contact Me
+                </Button>
+              </div>
+            </div>
+          </div>
+        </WindowFrame>
+
+        {/* Contact Window */}
+        <WindowFrame title="Contact Information" windowType="contact" className="max-w-2xl">
+          <div className="space-y-4">
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <h3 className="font-semibold text-gray-800 mb-3">Get In Touch</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Mail className="w-4 h-4 text-blue-600" />
+                    <span className="text-sm">{portfolioData.contact.email}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-4 h-4 text-blue-600" />
+                    <span className="text-sm">{portfolioData.contact.phone}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Linkedin className="w-4 h-4 text-blue-600" />
+                    <a href={portfolioData.contact.linkedin} className="text-sm text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
+                      LinkedIn Profile
+                    </a>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Github className="w-4 h-4 text-blue-600" />
+                    <a href={portfolioData.contact.github} className="text-sm text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
+                      GitHub Profile
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <form onSubmit={handleFormSubmit} className="space-y-3">
+                <h3 className="font-semibold text-gray-800 mb-3">Send Message</h3>
+                <Input
+                  placeholder="Your Name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  required
+                  className="text-sm"
+                />
+                <Input
+                  type="email"
+                  placeholder="Your Email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  required
+                  className="text-sm"
+                />
+                <Textarea
+                  placeholder="Your Message"
+                  rows={3}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  required
+                  className="text-sm"
+                />
+                <Button type="submit" className="w-full">
+                  Send Message
+                </Button>
+              </form>
+            </div>
+          </div>
+        </WindowFrame>
+      </div>
     </div>
   );
 };
