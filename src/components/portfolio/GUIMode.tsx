@@ -35,6 +35,7 @@ const GUIMode = () => {
   });
 
   const openWindow = (windowType: WindowType) => {
+    console.log('Opening window:', windowType);
     setWindowStates(prev => ({
       ...prev,
       [windowType]: { isMaximized: false, isMinimized: false, isOpen: true }
@@ -108,11 +109,15 @@ const GUIMode = () => {
     return (
       <div 
         className={`
-          bg-white border-2 border-gray-400 shadow-lg
-          ${state.isMaximized ? 'fixed inset-4 z-50' : 'relative mb-4'}
+          bg-white border-2 border-gray-400 shadow-lg z-10
+          ${state.isMaximized ? 'fixed inset-4 z-50' : 'absolute top-20 left-4 w-full max-w-4xl'}
           ${state.isMinimized ? 'h-8' : 'min-h-64'}
           ${className}
         `}
+        style={{
+          left: state.isMaximized ? undefined : Math.random() * 100 + 50,
+          top: state.isMaximized ? undefined : Math.random() * 100 + 150,
+        }}
       >
         <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-2 py-1 flex items-center justify-between">
           <span className="font-bold text-sm">{title}</span>
@@ -144,7 +149,7 @@ const GUIMode = () => {
           </div>
         </div>
         {!state.isMinimized && (
-          <div className="p-4 overflow-auto max-h-96">
+          <div className="p-4 overflow-auto max-h-96 bg-white">
             {children}
           </div>
         )}
@@ -153,9 +158,9 @@ const GUIMode = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-400 to-blue-600 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-teal-400 to-blue-600 p-4 relative">
       {/* Desktop Icons */}
-      <div className="grid grid-cols-6 gap-4 mb-4">
+      <div className="grid grid-cols-6 gap-4 mb-4 relative z-0">
         {[
           { type: 'about' as WindowType, icon: '👤', label: 'About' },
           { type: 'skills' as WindowType, icon: '🛠️', label: 'Skills' },
@@ -169,7 +174,10 @@ const GUIMode = () => {
           <div
             key={item.type}
             className="flex flex-col items-center cursor-pointer group"
-            onDoubleClick={() => openWindow(item.type)}
+            onDoubleClick={() => {
+              console.log('Double clicked:', item.type);
+              openWindow(item.type);
+            }}
           >
             <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-2xl group-hover:bg-blue-200 transition-colors">
               {item.icon}
@@ -180,7 +188,7 @@ const GUIMode = () => {
       </div>
 
       {/* Taskbar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-2 flex items-center justify-between">
+      <div className="fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-2 flex items-center justify-between z-50">
         <div className="flex items-center gap-2">
           <Button
             size="sm"
@@ -216,7 +224,7 @@ const GUIMode = () => {
       </div>
 
       {/* Windows Container */}
-      <div className="pb-16">
+      <div className="relative">
         {/* About Window */}
         <WindowFrame title="About - Mahendra Kumar Dwivedi" windowType="about" className="max-w-2xl">
           <div className="text-center">
