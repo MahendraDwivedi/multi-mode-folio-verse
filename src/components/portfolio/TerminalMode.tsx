@@ -51,6 +51,11 @@ const TerminalMode = () => {
     certifications: `
 ╔═══════════════════════════════════════╗
 ║          CERTIFICATIONS               ║
+╚═══════════════════════════════════════╝`,
+
+    hire: `
+╔═══════════════════════════════════════╗
+║              HIRE ME                  ║
 ╚═══════════════════════════════════════╝`
   };
 
@@ -84,9 +89,16 @@ Type 'help' to see available commands or use the buttons below.
     { command: 'show experience', description: 'Show work experience' },
     { command: 'show certifications', description: 'List certifications' },
     { command: 'show contact', description: 'Display contact information' },
+    { command: 'show hire', description: 'Show hiring information and roles' },
+    { command: 'hire whatsapp', description: 'Open WhatsApp for job discussions' },
     { command: 'help', description: 'Show this help message' },
     { command: 'clear', description: 'Clear terminal screen' },
   ];
+
+  const openWhatsApp = () => {
+    const message = encodeURIComponent("Hi Mahendra! I'm interested in discussing potential opportunities with you.");
+    window.open(`https://wa.me/919580187515?text=${message}`, '_blank');
+  };
 
   const executeCommand = (cmd: string) => {
     const command = cmd.toLowerCase().trim();
@@ -116,6 +128,45 @@ ${commands.map(c => `  ${c.command.padEnd(20)} - ${c.description}`).join('\n')}`
       case 'clear':
         setLines([]);
         return;
+
+      case 'hire whatsapp':
+        output = 'Opening WhatsApp chat for job discussions...';
+        openWhatsApp();
+        break;
+
+      case 'show hire':
+        asciiHeader = asciiArt.hire;
+        output = `Available Positions:
+
+1. Backend Developer
+   • Specialized in Node.js, Express.js, MongoDB, PostgreSQL
+   • RESTful APIs and server-side development
+   • Minimum Stipend: ₹15,000/month
+
+2. Frontend Developer
+   • Expert in React.js, Next.js, TypeScript, Tailwind CSS
+   • Modern UI/UX and responsive design
+   • Minimum Stipend: ₹15,000/month
+
+3. Full Stack Developer
+   • Complete web development solutions
+   • MERN/PERN stack expertise
+   • End-to-end application development
+   • Minimum Stipend: ₹15,000/month
+
+4. Java Developer
+   • Strong foundation in Core Java and Spring Boot
+   • Enterprise application development
+   • Object-oriented programming expertise
+   • Minimum Stipend: ₹15,000/month
+
+Contact Information:
+• WhatsApp: +91 9580187515 (type 'hire whatsapp')
+• Email: ${portfolioData.contact.email}
+• LinkedIn: ${portfolioData.contact.linkedin}
+
+Ready to contribute to your team with dedication and technical expertise!`;
+        break;
 
       case 'show about':
         asciiHeader = asciiArt.about;
@@ -314,6 +365,13 @@ ${portfolioData.contact.website ? `Website: ${portfolioData.contact.website}` : 
             onClick={() => handleCommandClick('clear')}
           >
             clear
+          </Button>
+          <Button
+            variant="outline"
+            className="bg-black/40 border-green-500/30 text-green-400 hover:bg-green-500/10 hover:border-green-400 transition-all font-mono text-sm"
+            onClick={() => handleCommandClick('hire whatsapp')}
+          >
+            hire whatsapp
           </Button>
         </div>
       </div>

@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Download, Mail, Github, Linkedin, ExternalLink, Phone, MapPin } from 'lucide-react';
+import { Download, Mail, Github, Linkedin, ExternalLink, Phone, MapPin, MessageCircle, Briefcase } from 'lucide-react';
 import { portfolioData } from '@/data/portfolioData';
 
 const WebMode = () => {
@@ -23,6 +23,7 @@ const WebMode = () => {
     { id: 'projects', label: 'Projects' },
     { id: 'experience', label: 'Experience' },
     { id: 'certifications', label: 'Certifications' },
+    { id: 'hire', label: 'Hire Me' },
     { id: 'contact', label: 'Contact' }
   ];
 
@@ -38,6 +39,20 @@ const WebMode = () => {
     // Handle form submission here
     alert('Thank you for your message! I\'ll get back to you soon.');
     setFormData({ name: '', email: '', message: '' });
+  };
+
+  const openWhatsApp = () => {
+    const message = encodeURIComponent("Hi Mahendra! I'm interested in discussing potential opportunities with you.");
+    window.open(`https://wa.me/919580187515?text=${message}`, '_blank');
+  };
+
+  const downloadResume = () => {
+    const link = document.createElement('a');
+    link.href = '/lovable-uploads/7b88955d-8e68-42ad-ad8c-3891fb6682ce.png';
+    link.download = 'Mahendra_Kumar_Dwivedi_Resume.png';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -61,7 +76,7 @@ const WebMode = () => {
             ))}
           </div>
 
-          <Button size="sm" className="flex items-center gap-2">
+          <Button size="sm" className="flex items-center gap-2" onClick={downloadResume}>
             <Download className="w-4 h-4" />
             Resume
           </Button>
@@ -199,13 +214,13 @@ const WebMode = () => {
                   </div>
                   <div className="flex gap-2">
                     {project.githubUrl && (
-                      <Button size="sm" variant="outline" className="flex items-center gap-1">
+                      <Button size="sm" variant="outline" className="flex items-center gap-1" onClick={() => window.open(project.githubUrl, '_blank')}>
                         <Github className="w-3 h-3" />
                         Code
                       </Button>
                     )}
                     {project.demoUrl && (
-                      <Button size="sm" variant="outline" className="flex items-center gap-1">
+                      <Button size="sm" variant="outline" className="flex items-center gap-1" onClick={() => window.open(project.demoUrl, '_blank')}>
                         <ExternalLink className="w-3 h-3" />
                         Demo
                       </Button>
@@ -269,8 +284,75 @@ const WebMode = () => {
         </div>
       </section>
 
+      {/* Hire Me Section */}
+      <section id="hire" className="py-16 px-4">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-foreground mb-12 text-center">Hire Me</h2>
+          
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <Card className="p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <Briefcase className="w-8 h-8 text-primary" />
+                <h3 className="text-xl font-semibold text-foreground">Backend Developer</h3>
+              </div>
+              <p className="text-muted-foreground mb-4">
+                Specialized in Node.js, Express.js, MongoDB, PostgreSQL, and RESTful APIs
+              </p>
+              <p className="text-lg font-medium text-green-600">Minimum Stipend: ₹15,000/month</p>
+            </Card>
+
+            <Card className="p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <Code className="w-8 h-8 text-primary" />
+                <h3 className="text-xl font-semibold text-foreground">Frontend Developer</h3>
+              </div>
+              <p className="text-muted-foreground mb-4">
+                Expert in React.js, Next.js, TypeScript, Tailwind CSS, and modern UI/UX
+              </p>
+              <p className="text-lg font-medium text-green-600">Minimum Stipend: ₹15,000/month</p>
+            </Card>
+
+            <Card className="p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <ExternalLink className="w-8 h-8 text-primary" />
+                <h3 className="text-xl font-semibold text-foreground">Full Stack Developer</h3>
+              </div>
+              <p className="text-muted-foreground mb-4">
+                Complete web development solutions with MERN/PERN stack expertise
+              </p>
+              <p className="text-lg font-medium text-green-600">Minimum Stipend: ₹15,000/month</p>
+            </Card>
+
+            <Card className="p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <Github className="w-8 h-8 text-primary" />
+                <h3 className="text-xl font-semibold text-foreground">Java Developer</h3>
+              </div>
+              <p className="text-muted-foreground mb-4">
+                Strong foundation in Core Java, Spring Boot, and enterprise applications
+              </p>
+              <p className="text-lg font-medium text-green-600">Minimum Stipend: ₹15,000/month</p>
+            </Card>
+          </div>
+
+          <div className="text-center">
+            <h3 className="text-xl font-semibold text-foreground mb-6">Ready to start working together?</h3>
+            <div className="flex justify-center gap-4">
+              <Button onClick={openWhatsApp} className="flex items-center gap-2 bg-green-600 hover:bg-green-700">
+                <MessageCircle className="w-4 h-4" />
+                Chat on WhatsApp
+              </Button>
+              <Button onClick={() => scrollToSection('contact')} variant="outline" className="flex items-center gap-2">
+                <Mail className="w-4 h-4" />
+                Contact Me
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
-      <section id="contact" className="py-16 px-4">
+      <section id="contact" className="py-16 px-4 bg-muted/50">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-foreground mb-12 text-center">Get In Touch</h2>
           <div className="grid md:grid-cols-2 gap-12">
@@ -287,13 +369,13 @@ const WebMode = () => {
                 </div>
                 <div className="flex items-center gap-3">
                   <Linkedin className="w-5 h-5 text-primary" />
-                  <a href={portfolioData.contact.linkedin} className="text-primary hover:underline">
+                  <a href={portfolioData.contact.linkedin} className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
                     LinkedIn Profile
                   </a>
                 </div>
                 <div className="flex items-center gap-3">
                   <Github className="w-5 h-5 text-primary" />
-                  <a href={portfolioData.contact.github} className="text-primary hover:underline">
+                  <a href={portfolioData.contact.github} className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
                     GitHub Profile
                   </a>
                 </div>
@@ -338,13 +420,23 @@ const WebMode = () => {
         </div>
       </section>
 
-      {/* Floating Download Button */}
-      <Button
-        className="fixed bottom-6 right-6 rounded-full w-14 h-14 shadow-lg"
-        size="lg"
-      >
-        <Download className="w-5 h-5" />
-      </Button>
+      {/* Floating Buttons */}
+      <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-2">
+        <Button
+          onClick={openWhatsApp}
+          className="rounded-full w-14 h-14 bg-green-600 hover:bg-green-700 shadow-lg"
+          size="lg"
+        >
+          <MessageCircle className="w-5 h-5" />
+        </Button>
+        <Button
+          onClick={downloadResume}
+          className="rounded-full w-14 h-14 shadow-lg"
+          size="lg"
+        >
+          <Download className="w-5 h-5" />
+        </Button>
+      </div>
 
       {/* Footer */}
       <footer className="py-8 px-4 bg-muted/50 border-t border-border">
