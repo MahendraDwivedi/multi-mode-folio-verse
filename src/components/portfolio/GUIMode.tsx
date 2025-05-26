@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Download, Mail, Github, Linkedin, ExternalLink, Phone, MapPin, MessageCircle, Briefcase, Code, X, Minus, Square } from 'lucide-react';
+import { Download, Mail, Github, Linkedin, ExternalLink, Phone, MapPin, MessageCircle, Briefcase, Code2, X, Minus, Square } from 'lucide-react';
 import { portfolioData } from '@/data/portfolioData';
 
 interface WindowState {
@@ -109,7 +109,7 @@ const GUIMode = () => {
       <div 
         className={`
           bg-white border-2 border-gray-400 shadow-lg
-          ${state.isMaximized ? 'fixed inset-4 z-50' : 'relative'}
+          ${state.isMaximized ? 'fixed inset-4 z-50' : 'relative mb-4'}
           ${state.isMinimized ? 'h-8' : 'min-h-64'}
           ${className}
         `}
@@ -215,8 +215,8 @@ const GUIMode = () => {
         </div>
       </div>
 
-      {/* Windows */}
-      <div className="space-y-4">
+      {/* Windows Container */}
+      <div className="pb-16">
         {/* About Window */}
         <WindowFrame title="About - Mahendra Kumar Dwivedi" windowType="about" className="max-w-2xl">
           <div className="text-center">
@@ -399,7 +399,7 @@ const GUIMode = () => {
 
               <Card className="p-4">
                 <div className="flex items-center gap-2 mb-3">
-                  <Code className="w-6 h-6 text-blue-600" />
+                  <Code2 className="w-6 h-6 text-blue-600" />
                   <h3 className="font-semibold text-gray-800">Frontend Developer</h3>
                 </div>
                 <p className="text-gray-600 text-sm mb-3">
