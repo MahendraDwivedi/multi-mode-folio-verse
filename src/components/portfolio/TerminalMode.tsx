@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { portfolioData } from '@/data/portfolioData';
@@ -126,7 +125,9 @@ Email: ${portfolioData.about.email}
 Phone: ${portfolioData.about.phone}
 
 Description:
-${portfolioData.about.description}`;
+${portfolioData.about.description}
+
+Profile Image: ${portfolioData.about.profileImage ? 'Available' : 'Not set'}`;
         break;
 
       case 'show academics':

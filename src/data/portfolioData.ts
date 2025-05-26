@@ -7,6 +7,7 @@ export interface PortfolioData {
     location: string;
     email: string;
     phone: string;
+    profileImage?: string;
   };
   academics: Array<{
     degree: string;
@@ -52,116 +53,99 @@ export interface PortfolioData {
 
 export const portfolioData: PortfolioData = {
   about: {
-    name: "Alex Johnson",
-    title: "Full Stack Developer & UI/UX Designer",
-    description: "Passionate software developer with 3+ years of experience creating innovative web applications. I specialize in React, Node.js, and modern UI/UX design principles. Always eager to learn new technologies and solve complex problems.",
-    location: "San Francisco, CA",
-    email: "alex.johnson@email.com",
-    phone: "+1 (555) 123-4567"
+    name: "Mahendra Kumar Dwivedi",
+    title: "B.Tech Student | Software Developer",
+    description: "Passionate B.Tech student with a keen interest in software development and creative design. Currently pursuing Computer Science Engineering with a focus on web development and modern technologies.",
+    location: "Sonbhadra, Uttar Pradesh",
+    email: "mahendra.dwivedi@email.com",
+    phone: "+91 XXXXX-XXXXX",
+    profileImage: "/lovable-uploads/7b88955d-8e68-42ad-ad8c-3891fb6682ce.png"
   },
   academics: [
     {
-      degree: "Bachelor of Science in Computer Science",
-      institution: "Stanford University",
-      year: "2020-2024",
-      grade: "3.8 GPA",
-      achievements: ["Dean's List (4 semesters)", "ACM Programming Contest Winner", "Computer Science Excellence Award"]
+      degree: "B.Tech in Computer Science and Engineering",
+      institution: "Rajkiya Engineering College, Sonbhadra",
+      year: "2021-2025 (Currently 6th Semester)",
+      grade: "7.5 CGPA",
+      achievements: ["Consistent Academic Performance", "Active in Technical Events", "Web Development Projects"]
     },
     {
-      degree: "High School Diploma",
-      institution: "Tech Prep Academy",
-      year: "2016-2020",
-      grade: "4.0 GPA",
-      achievements: ["Valedictorian", "National Merit Scholar", "Mathematics Olympiad Gold Medal"]
+      degree: "12th Grade (Senior Secondary)",
+      institution: "AIMS International School, Gonda",
+      year: "2020-2021",
+      grade: "89.6%",
+      achievements: ["Science Stream Excellence", "Mathematics High Scorer", "Academic Merit"]
+    },
+    {
+      degree: "10th Grade (Secondary)",
+      institution: "AIMS International School, Gonda",
+      year: "2018-2019",
+      grade: "92.67%",
+      achievements: ["Academic Excellence", "All Subjects Distinction", "School Topper"]
     }
   ],
   skills: {
     technical: [
-      "JavaScript/TypeScript", "React", "Node.js", "Python", "Java", "SQL", "MongoDB", 
-      "AWS", "Docker", "Git", "Figma", "Adobe Creative Suite"
+      "JavaScript", "React", "Node.js", "HTML/CSS", "C++", "Python", 
+      "Git", "MongoDB", "Express.js", "Vercel Deployment", "Web Development", "UI/UX Design"
     ],
     soft: [
-      "Problem Solving", "Team Leadership", "Communication", "Project Management", 
-      "Creative Thinking", "Adaptability", "Time Management"
+      "Problem Solving", "Creative Thinking", "Team Collaboration", "Communication", 
+      "Project Management", "Adaptability", "Learning Agility"
     ],
-    languages: ["English (Native)", "Spanish (Fluent)", "French (Intermediate)"]
+    languages: ["Hindi (Native)", "English (Fluent)"]
   },
   projects: [
     {
-      title: "EcoTracker",
-      description: "A comprehensive sustainability tracking app that helps users monitor their carbon footprint, set environmental goals, and connect with eco-friendly communities.",
-      techStack: ["React", "Node.js", "MongoDB", "Express", "Chart.js"],
-      githubUrl: "https://github.com/alexjohnson/ecotracker",
-      demoUrl: "https://ecotracker-demo.com",
-      image: "photo-1581090464777-f3220bbe1b8b"
-    },
-    {
-      title: "CodeCollab",
-      description: "Real-time collaborative coding platform with video chat, screen sharing, and integrated development environment for remote pair programming.",
-      techStack: ["React", "WebRTC", "Socket.io", "Monaco Editor", "Docker"],
-      githubUrl: "https://github.com/alexjohnson/codecollab",
-      demoUrl: "https://codecollab-demo.com",
+      title: "Learnix",
+      description: "A comprehensive learning platform web application designed to provide interactive educational content and resources for students. Features modern UI/UX design with responsive layout.",
+      techStack: ["React", "Node.js", "CSS", "JavaScript", "Vercel"],
+      githubUrl: "https://github.com/MahendraDwivedi/learnix",
+      demoUrl: "https://learnix-three.vercel.app",
       image: "photo-1498050108023-c5249f4df085"
     },
     {
-      title: "Smart Home Dashboard",
-      description: "IoT dashboard for controlling and monitoring smart home devices with beautiful data visualizations and automated routines.",
-      techStack: ["Vue.js", "Python", "Raspberry Pi", "MQTT", "InfluxDB"],
-      githubUrl: "https://github.com/alexjohnson/smart-home",
+      title: "Training & Placement Website",
+      description: "A complete web solution for managing campus placements and training resources. Includes student registration, company listings, and placement tracking features.",
+      techStack: ["React", "Node.js", "MongoDB", "Express", "Vercel"],
+      githubUrl: "https://github.com/MahendraDwivedi/training-placement",
+      demoUrl: "https://training-placement-eta.vercel.app",
       image: "photo-1486312338219-ce68d2c6f44d"
     }
   ],
   certifications: [
     {
-      name: "AWS Certified Developer Associate",
-      issuer: "Amazon Web Services",
+      name: "Web Development Fundamentals",
+      issuer: "Online Learning Platform",
       year: "2023",
-      credentialId: "AWS-DVA-2023-001"
+      credentialId: "WEB-2023-001"
     },
     {
-      name: "Google UX Design Professional Certificate",
-      issuer: "Google",
-      year: "2022",
-      credentialId: "GOOGLE-UX-2022-456"
-    },
-    {
-      name: "MongoDB Certified Developer",
-      issuer: "MongoDB Inc.",
+      name: "React Development",
+      issuer: "Technical Institute",
       year: "2023",
-      credentialId: "MDB-DEV-2023-789"
+      credentialId: "REACT-2023-456"
     }
   ],
   experience: [
     {
-      title: "Software Development Intern",
-      company: "TechCorp Solutions",
-      duration: "Jun 2023 - Aug 2023",
+      title: "Web Development Projects",
+      company: "Personal Projects",
+      duration: "2022 - Present",
       description: [
-        "Developed REST APIs using Node.js and Express for client projects",
-        "Collaborated with senior developers on React frontend applications",
-        "Participated in agile development processes and code reviews",
-        "Improved application performance by 25% through optimization"
-      ],
-      type: "internship"
-    },
-    {
-      title: "Freelance Web Developer",
-      company: "Self-Employed",
-      duration: "Jan 2022 - Present",
-      description: [
-        "Built custom websites for 15+ small businesses and startups",
-        "Specialized in React, WordPress, and e-commerce solutions",
-        "Managed full project lifecycle from requirements to deployment",
-        "Maintained 98% client satisfaction rate"
+        "Developed multiple web applications using modern technologies",
+        "Implemented responsive design principles for mobile-first approach",
+        "Deployed applications on cloud platforms like Vercel",
+        "Collaborated on open-source projects and learning platforms"
       ],
       type: "freelance"
     }
   ],
   contact: {
-    email: "alex.johnson@email.com",
-    phone: "+1 (555) 123-4567",
-    linkedin: "https://linkedin.com/in/alexjohnson",
-    github: "https://github.com/alexjohnson",
-    website: "https://alexjohnson.dev"
+    email: "mahendra.dwivedi@email.com",
+    phone: "+91 XXXXX-XXXXX",
+    linkedin: "https://linkedin.com/in/mahendradwivedi",
+    github: "https://github.com/MahendraDwivedi",
+    website: "https://mahendra-portfolio.vercel.app"
   }
 };

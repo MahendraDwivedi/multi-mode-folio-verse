@@ -72,9 +72,17 @@ const WebMode = () => {
       <section id="about" className="pt-20 pb-16 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center py-20">
-            <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl font-bold">
-              {portfolioData.about.name.split(' ').map(n => n[0]).join('')}
-            </div>
+            {portfolioData.about.profileImage ? (
+              <img 
+                src={portfolioData.about.profileImage} 
+                alt={portfolioData.about.name}
+                className="w-32 h-32 rounded-full mx-auto mb-8 object-cover border-4 border-primary/20 shadow-lg"
+              />
+            ) : (
+              <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl font-bold">
+                {portfolioData.about.name.split(' ').map(n => n[0]).join('')}
+              </div>
+            )}
             <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-4">
               {portfolioData.about.name}
             </h1>

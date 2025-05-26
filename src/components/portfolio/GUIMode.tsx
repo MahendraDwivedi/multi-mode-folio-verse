@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -95,9 +94,17 @@ const GUIMode = () => {
         return (
           <div className="p-6 space-y-4">
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
-                {portfolioData.about.name.split(' ').map(n => n[0]).join('')}
-              </div>
+              {portfolioData.about.profileImage ? (
+                <img 
+                  src={portfolioData.about.profileImage} 
+                  alt={portfolioData.about.name}
+                  className="w-16 h-16 rounded-full object-cover border-2 border-primary/20"
+                />
+              ) : (
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                  {portfolioData.about.name.split(' ').map(n => n[0]).join('')}
+                </div>
+              )}
               <div>
                 <h2 className="text-2xl font-bold text-foreground">{portfolioData.about.name}</h2>
                 <p className="text-muted-foreground">{portfolioData.about.title}</p>
