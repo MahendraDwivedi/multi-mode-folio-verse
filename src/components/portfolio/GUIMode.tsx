@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Minus, Square, X, Folder, User, GraduationCap, Code, FolderOpen, Award, Briefcase, Mail, Download } from 'lucide-react';
+import { Minus, Square, X, Folder, User, GraduationCap, Code, FolderOpen, Award, Briefcase, Mail, Download, MessageCircle, ExternalLink } from 'lucide-react';
 import { portfolioData } from '@/data/portfolioData';
 
-type WindowType = 'about' | 'academics' | 'skills' | 'projects' | 'certifications' | 'experience' | 'contact' | 'achievements';
+type WindowType = 'about' | 'academics' | 'skills' | 'projects' | 'certifications' | 'experience' | 'contact' | 'achievements' | 'hire';
 
 interface WindowState {
   id: string;
@@ -41,7 +41,8 @@ const GUIMode = () => {
     certifications: Award,
     experience: Briefcase,
     contact: Mail,
-    achievements: Award
+    achievements: Award,
+    hire: Briefcase
   };
 
   const openWindow = (type: WindowType, title: string) => {
@@ -94,6 +95,11 @@ const GUIMode = () => {
     document.body.removeChild(link);
   };
 
+  const openWhatsApp = () => {
+    const message = encodeURIComponent("Hi Mahendra! I'm interested in discussing potential opportunities with you.");
+    window.open(`https://wa.me/919580187515?text=${message}`, '_blank');
+  };
+
   const renderWindowContent = (window: WindowState) => {
     switch (window.type) {
       case 'about':
@@ -131,17 +137,84 @@ const GUIMode = () => {
                 <span className="font-medium">LeetCode Rating:</span> 1636
               </div>
             </div>
-            <Button onClick={downloadResume} className="flex items-center gap-2">
-              <Download className="w-4 h-4" />
-              Download Resume
-            </Button>
+            <div className="flex gap-2">
+              <Button onClick={downloadResume} className="flex items-center gap-2">
+                <Download className="w-4 h-4" />
+                Download Resume
+              </Button>
+              <Button onClick={() => openWindow('hire', 'Hire Me')} variant="outline" className="flex items-center gap-2">
+                <Briefcase className="w-4 h-4" />
+                Hire Me
+              </Button>
+            </div>
           </div>
         );
       
+      case 'hire':
+        return (
+          <div className="p-6 space-y-6">
+            <h2 className="text-xl font-bold text-foreground mb-4">Hire Me</h2>
+            
+            <div className="grid gap-4">
+              <Card className="p-4">
+                <h3 className="font-semibold text-foreground mb-2">Backend Developer</h3>
+                <p className="text-muted-foreground text-sm mb-2">
+                  Specialized in Node.js, Express.js, MongoDB, PostgreSQL, and RESTful APIs
+                </p>
+                <p className="text-sm font-medium text-green-600">Minimum Stipend: ₹15,000/month</p>
+              </Card>
+
+              <Card className="p-4">
+                <h3 className="font-semibold text-foreground mb-2">Frontend Developer</h3>
+                <p className="text-muted-foreground text-sm mb-2">
+                  Expert in React.js, Next.js, TypeScript, Tailwind CSS, and modern UI/UX
+                </p>
+                <p className="text-sm font-medium text-green-600">Minimum Stipend: ₹15,000/month</p>
+              </Card>
+
+              <Card className="p-4">
+                <h3 className="font-semibold text-foreground mb-2">Full Stack Developer</h3>
+                <p className="text-muted-foreground text-sm mb-2">
+                  Complete web development solutions with MERN/PERN stack expertise
+                </p>
+                <p className="text-sm font-medium text-green-600">Minimum Stipend: ₹15,000/month</p>
+              </Card>
+
+              <Card className="p-4">
+                <h3 className="font-semibold text-foreground mb-2">Java Developer</h3>
+                <p className="text-muted-foreground text-sm mb-2">
+                  Strong foundation in Core Java, Spring Boot, and enterprise applications
+                </p>
+                <p className="text-sm font-medium text-green-600">Minimum Stipend: ₹15,000/month</p>
+              </Card>
+            </div>
+
+            <div className="border-t pt-4">
+              <h3 className="font-semibold text-foreground mb-3">Get in Touch</h3>
+              <div className="flex gap-2">
+                <Button onClick={openWhatsApp} className="flex items-center gap-2 bg-green-600 hover:bg-green-700">
+                  <MessageCircle className="w-4 h-4" />
+                  Chat on WhatsApp
+                </Button>
+                <Button onClick={() => openWindow('contact', 'Contact')} variant="outline" className="flex items-center gap-2">
+                  <Mail className="w-4 h-4" />
+                  Contact Details
+                </Button>
+              </div>
+            </div>
+          </div>
+        );
+
       case 'academics':
         return (
           <div className="p-6 space-y-4">
-            <h2 className="text-xl font-bold text-foreground mb-4">Academic Background</h2>
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-bold text-foreground mb-4">Academic Background</h2>
+              <Button onClick={() => openWindow('hire', 'Hire Me')} size="sm" variant="outline" className="flex items-center gap-1">
+                <Briefcase className="w-3 h-3" />
+                Hire Me
+              </Button>
+            </div>
             <div className="space-y-4 max-h-80 overflow-y-auto">
               {portfolioData.academics.map((edu, index) => (
                 <Card key={index} className="p-4">
@@ -162,7 +235,13 @@ const GUIMode = () => {
       case 'skills':
         return (
           <div className="p-6 space-y-6 max-h-96 overflow-y-auto">
-            <h2 className="text-xl font-bold text-foreground mb-4">Skills & Expertise</h2>
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-bold text-foreground mb-4">Skills & Expertise</h2>
+              <Button onClick={() => openWindow('hire', 'Hire Me')} size="sm" variant="outline" className="flex items-center gap-1">
+                <Briefcase className="w-3 h-3" />
+                Hire Me
+              </Button>
+            </div>
             
             <div>
               <h3 className="font-semibold text-foreground mb-2">Frontend</h3>
@@ -224,7 +303,13 @@ const GUIMode = () => {
       case 'projects':
         return (
           <div className="p-6 space-y-4">
-            <h2 className="text-xl font-bold text-foreground mb-4">Projects</h2>
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-bold text-foreground mb-4">Projects</h2>
+              <Button onClick={() => openWindow('hire', 'Hire Me')} size="sm" variant="outline" className="flex items-center gap-1">
+                <Briefcase className="w-3 h-3" />
+                Hire Me
+              </Button>
+            </div>
             <div className="space-y-4 max-h-80 overflow-y-auto">
               {portfolioData.projects.map((project, index) => (
                 <Card key={index} className="p-4">
@@ -250,6 +335,7 @@ const GUIMode = () => {
                     )}
                     {project.demoUrl && (
                       <Button size="sm" variant="outline" className="text-xs" onClick={() => window.open(project.demoUrl, '_blank')}>
+                        <ExternalLink className="w-3 h-3 mr-1" />
                         Live Demo
                       </Button>
                     )}
@@ -263,7 +349,13 @@ const GUIMode = () => {
       case 'achievements':
         return (
           <div className="p-6 space-y-4">
-            <h2 className="text-xl font-bold text-foreground mb-4">Achievements</h2>
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-bold text-foreground mb-4">Achievements</h2>
+              <Button onClick={() => openWindow('hire', 'Hire Me')} size="sm" variant="outline" className="flex items-center gap-1">
+                <Briefcase className="w-3 h-3" />
+                Hire Me
+              </Button>
+            </div>
             <div className="space-y-3">
               {portfolioData.achievements.map((achievement, index) => (
                 <Card key={index} className="p-4">
@@ -277,7 +369,13 @@ const GUIMode = () => {
       case 'certifications':
         return (
           <div className="p-6 space-y-4">
-            <h2 className="text-xl font-bold text-foreground mb-4">Certifications</h2>
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-bold text-foreground mb-4">Certifications</h2>
+              <Button onClick={() => openWindow('hire', 'Hire Me')} size="sm" variant="outline" className="flex items-center gap-1">
+                <Briefcase className="w-3 h-3" />
+                Hire Me
+              </Button>
+            </div>
             {portfolioData.certifications.map((cert, index) => (
               <Card key={index} className="p-4">
                 <h3 className="font-semibold text-foreground">{cert.name}</h3>
@@ -293,7 +391,13 @@ const GUIMode = () => {
       case 'experience':
         return (
           <div className="p-6 space-y-4">
-            <h2 className="text-xl font-bold text-foreground mb-4">Experience</h2>
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-bold text-foreground mb-4">Experience</h2>
+              <Button onClick={() => openWindow('hire', 'Hire Me')} size="sm" variant="outline" className="flex items-center gap-1">
+                <Briefcase className="w-3 h-3" />
+                Hire Me
+              </Button>
+            </div>
             <div className="space-y-4 max-h-80 overflow-y-auto">
               {portfolioData.experience.map((exp, index) => (
                 <Card key={index} className="p-4">
@@ -318,7 +422,13 @@ const GUIMode = () => {
       case 'contact':
         return (
           <div className="p-6 space-y-4">
-            <h2 className="text-xl font-bold text-foreground mb-4">Contact Information</h2>
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-bold text-foreground mb-4">Contact Information</h2>
+              <Button onClick={() => openWindow('hire', 'Hire Me')} size="sm" variant="outline" className="flex items-center gap-1">
+                <Briefcase className="w-3 h-3" />
+                Hire Me
+              </Button>
+            </div>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary" />
@@ -349,6 +459,12 @@ const GUIMode = () => {
                 </div>
               )}
             </div>
+            <div className="border-t pt-4">
+              <Button onClick={openWhatsApp} className="flex items-center gap-2 bg-green-600 hover:bg-green-700">
+                <MessageCircle className="w-4 h-4" />
+                Chat on WhatsApp
+              </Button>
+            </div>
           </div>
         );
 
@@ -365,18 +481,25 @@ const GUIMode = () => {
           <div
             key={type}
             className="flex flex-col items-center cursor-pointer hover:bg-white/10 p-2 rounded-lg transition-colors"
-            onClick={() => openWindow(type as WindowType, type.charAt(0).toUpperCase() + type.slice(1))}
+            onClick={() => openWindow(type as WindowType, type === 'hire' ? 'Hire Me' : type.charAt(0).toUpperCase() + type.slice(1))}
           >
             <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-1">
               <Icon className="w-6 h-6 text-gray-700 dark:text-gray-300" />
             </div>
-            <span className="text-xs text-gray-700 dark:text-gray-300 capitalize">{type}</span>
+            <span className="text-xs text-gray-700 dark:text-gray-300 capitalize">{type === 'hire' ? 'Hire Me' : type}</span>
           </div>
         ))}
       </div>
 
-      {/* Floating Resume Download Button */}
-      <div className="fixed bottom-6 right-6 z-40">
+      {/* Floating Buttons */}
+      <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-2">
+        <Button
+          onClick={openWhatsApp}
+          className="rounded-full w-14 h-14 bg-green-600 hover:bg-green-700 shadow-lg"
+          size="lg"
+        >
+          <MessageCircle className="w-6 h-6" />
+        </Button>
         <Button
           onClick={downloadResume}
           className="rounded-full w-14 h-14 bg-primary hover:bg-primary/90 shadow-lg"
@@ -416,8 +539,8 @@ const GUIMode = () => {
           style={{
             left: window.isMaximized ? 0 : window.position.x,
             top: window.isMaximized ? 0 : window.position.y,
-            width: window.isMaximized ? '100vw' : window.size.width,
-            height: window.isMaximized ? '100vh' : window.size.height,
+            width: window.isMaximized ? 'calc(100vw - 32px)' : window.size.width,
+            height: window.isMaximized ? 'calc(100vh - 80px)' : window.size.height,
             zIndex: window.zIndex,
           }}
           onClick={() => bringToFront(window.id)}
@@ -436,7 +559,10 @@ const GUIMode = () => {
                 size="sm"
                 variant="ghost"
                 className="w-6 h-6 p-0 hover:bg-yellow-500"
-                onClick={() => minimizeWindow(window.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  minimizeWindow(window.id);
+                }}
               >
                 <Minus className="w-3 h-3" />
               </Button>
@@ -444,7 +570,10 @@ const GUIMode = () => {
                 size="sm"
                 variant="ghost"
                 className="w-6 h-6 p-0 hover:bg-green-500"
-                onClick={() => maximizeWindow(window.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  maximizeWindow(window.id);
+                }}
               >
                 <Square className="w-3 h-3" />
               </Button>
@@ -452,7 +581,10 @@ const GUIMode = () => {
                 size="sm"
                 variant="ghost"
                 className="w-6 h-6 p-0 hover:bg-red-500"
-                onClick={() => closeWindow(window.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closeWindow(window.id);
+                }}
               >
                 <X className="w-3 h-3" />
               </Button>
