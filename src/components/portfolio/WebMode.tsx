@@ -5,8 +5,10 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Download, Mail, Github, Linkedin, ExternalLink, Phone, MapPin, MessageCircle, Briefcase, Code } from 'lucide-react';
+import { Download, Mail, Github, Linkedin, ExternalLink, Phone, MapPin, MessageCircle, Star } from 'lucide-react';
 import { portfolioData } from '@/data/portfolioData';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, PieChart, Pie, Cell, RadialBarChart, RadialBar, Legend } from 'recharts';
 
 const WebMode = () => {
   const [activeSection, setActiveSection] = useState('about');
@@ -15,15 +17,18 @@ const WebMode = () => {
     email: '',
     message: ''
   });
+  const [feedbackData, setFeedbackData] = useState({
+    name: '',
+    rating: 5,
+    comment: ''
+  });
 
   const navigation = [
     { id: 'about', label: 'About' },
     { id: 'academics', label: 'Education' },
     { id: 'skills', label: 'Skills' },
     { id: 'projects', label: 'Projects' },
-    { id: 'experience', label: 'Experience' },
     { id: 'certifications', label: 'Certifications' },
-    { id: 'hire', label: 'Hire Me' },
     { id: 'contact', label: 'Contact' }
   ];
 
@@ -36,9 +41,15 @@ const WebMode = () => {
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    // Handle form submission here
     alert('Thank you for your message! I\'ll get back to you soon.');
     setFormData({ name: '', email: '', message: '' });
+  };
+
+  const handleFeedbackSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Feedback submitted:', feedbackData);
+    alert('Thank you for your feedback!');
+    setFeedbackData({ name: '', rating: 5, comment: '' });
   };
 
   const openWhatsApp = () => {
@@ -53,6 +64,31 @@ const WebMode = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  // Skills data for charts
+  const skillsData = portfolioData.skills.technical.slice(0, 8).map((skill, index) => ({
+    name: skill,
+    proficiency: Math.floor(Math.random() * 30) + 70, // Random proficiency between 70-100
+    projects: Math.floor(Math.random() * 15) + 5
+  }));
+
+  const skillCategories = [
+    { name: 'Frontend', value: 35, color: '#3b82f6' },
+    { name: 'Backend', value: 30, color: '#10b981' },
+    { name: 'Database', value: 20, color: '#f59e0b' },
+    { name: 'Tools', value: 15, color: '#ef4444' }
+  ];
+
+  const chartConfig = {
+    proficiency: {
+      label: "Proficiency %",
+      color: "hsl(var(--primary))",
+    },
+    projects: {
+      label: "Projects",
+      color: "hsl(var(--secondary))",
+    },
   };
 
   return (
@@ -83,38 +119,45 @@ const WebMode = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - Side by Side Layout */}
       <section id="about" className="pt-20 pb-16 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center py-20">
-            {portfolioData.about.profileImage ? (
-              <img 
-                src={portfolioData.about.profileImage} 
-                alt={portfolioData.about.name}
-                className="w-32 h-32 rounded-full mx-auto mb-8 object-cover border-4 border-primary/20 shadow-lg"
-              />
-            ) : (
-              <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl font-bold">
-                {portfolioData.about.name.split(' ').map(n => n[0]).join('')}
-              </div>
-            )}
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-4">
-              {portfolioData.about.name}
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-              {portfolioData.about.title}
-            </p>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8">
-              {portfolioData.about.description}
-            </p>
-            <div className="flex items-center justify-center gap-6 text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4" />
-                {portfolioData.about.location}
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                {portfolioData.about.email}
+          <div className="grid md:grid-cols-2 gap-12 items-center py-20">
+            {/* Profile Image */}
+            <div className="flex justify-center">
+              {portfolioData.about.profileImage ? (
+                <img 
+                  src={portfolioData.about.profileImage} 
+                  alt={portfolioData.about.name}
+                  className="w-80 h-80 rounded-2xl object-cover border-4 border-primary/20 shadow-2xl"
+                />
+              ) : (
+                <div className="w-80 h-80 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-6xl font-bold shadow-2xl">
+                  {portfolioData.about.name.split(' ').map(n => n[0]).join('')}
+                </div>
+              )}
+            </div>
+
+            {/* Profile Details */}
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                {portfolioData.about.name}
+              </h1>
+              <p className="text-xl md:text-2xl text-muted-foreground mb-6">
+                {portfolioData.about.title}
+              </p>
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                {portfolioData.about.description}
+              </p>
+              <div className="space-y-4 text-muted-foreground">
+                <div className="flex items-center gap-3">
+                  <MapPin className="w-5 h-5 text-primary" />
+                  <span>{portfolioData.about.location}</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Mail className="w-5 h-5 text-primary" />
+                  <span>{portfolioData.about.email}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -147,12 +190,99 @@ const WebMode = () => {
             ))}
           </div>
         </div>
+
+        {/* Feedback Section */}
+        <div className="max-w-6xl mx-auto mt-16">
+          <Card className="p-6">
+            <h3 className="text-xl font-semibold text-foreground mb-6 text-center">Share Your Feedback</h3>
+            <form onSubmit={handleFeedbackSubmit} className="space-y-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <Input
+                  placeholder="Your Name"
+                  value={feedbackData.name}
+                  onChange={(e) => setFeedbackData({ ...feedbackData, name: e.target.value })}
+                  required
+                />
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-muted-foreground">Rating:</span>
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star
+                        key={star}
+                        className={`w-5 h-5 cursor-pointer ${
+                          star <= feedbackData.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
+                        }`}
+                        onClick={() => setFeedbackData({ ...feedbackData, rating: star })}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <Textarea
+                placeholder="Your feedback..."
+                rows={3}
+                value={feedbackData.comment}
+                onChange={(e) => setFeedbackData({ ...feedbackData, comment: e.target.value })}
+                required
+              />
+              <Button type="submit" className="w-full">Submit Feedback</Button>
+            </form>
+          </Card>
+        </div>
       </section>
 
-      {/* Skills Section */}
+      {/* Enhanced Skills Section with Charts */}
       <section id="skills" className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-foreground mb-12 text-center">Skills & Expertise</h2>
+          
+          {/* Skills Charts */}
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <Card className="p-6">
+              <h3 className="text-xl font-semibold text-foreground mb-6">Technical Proficiency</h3>
+              <ChartContainer config={chartConfig} className="h-80">
+                <ResponsiveContainer>
+                  <BarChart data={skillsData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                    <XAxis 
+                      dataKey="name" 
+                      angle={-45}
+                      textAnchor="end"
+                      height={80}
+                      fontSize={10}
+                    />
+                    <YAxis />
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <Bar dataKey="proficiency" fill="var(--color-proficiency)" radius={4} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </ChartContainer>
+            </Card>
+
+            <Card className="p-6">
+              <h3 className="text-xl font-semibold text-foreground mb-6">Skill Distribution</h3>
+              <ChartContainer config={chartConfig} className="h-80">
+                <ResponsiveContainer>
+                  <PieChart>
+                    <Pie
+                      data={skillCategories}
+                      cx="50%"
+                      cy="50%"
+                      outerRadius={80}
+                      dataKey="value"
+                      label={({ name, value }) => `${name}: ${value}%`}
+                    >
+                      {skillCategories.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                  </PieChart>
+                </ResponsiveContainer>
+              </ChartContainer>
+            </Card>
+          </div>
+
+          {/* Skills Lists */}
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="p-6">
               <h3 className="text-xl font-semibold text-foreground mb-4">Technical Skills</h3>
@@ -187,6 +317,45 @@ const WebMode = () => {
               </div>
             </Card>
           </div>
+        </div>
+
+        {/* Feedback Section */}
+        <div className="max-w-6xl mx-auto mt-16">
+          <Card className="p-6">
+            <h3 className="text-xl font-semibold text-foreground mb-6 text-center">Share Your Feedback</h3>
+            <form onSubmit={handleFeedbackSubmit} className="space-y-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <Input
+                  placeholder="Your Name"
+                  value={feedbackData.name}
+                  onChange={(e) => setFeedbackData({ ...feedbackData, name: e.target.value })}
+                  required
+                />
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-muted-foreground">Rating:</span>
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star
+                        key={star}
+                        className={`w-5 h-5 cursor-pointer ${
+                          star <= feedbackData.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
+                        }`}
+                        onClick={() => setFeedbackData({ ...feedbackData, rating: star })}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <Textarea
+                placeholder="Your feedback..."
+                rows={3}
+                value={feedbackData.comment}
+                onChange={(e) => setFeedbackData({ ...feedbackData, comment: e.target.value })}
+                required
+              />
+              <Button type="submit" className="w-full">Submit Feedback</Button>
+            </form>
+          </Card>
         </div>
       </section>
 
@@ -231,39 +400,49 @@ const WebMode = () => {
             ))}
           </div>
         </div>
-      </section>
 
-      {/* Experience Section */}
-      <section id="experience" className="py-16 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-foreground mb-12 text-center">Experience</h2>
-          <div className="space-y-6">
-            {portfolioData.experience.map((exp, index) => (
-              <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
-                  <div>
-                    <h3 className="text-xl font-semibold text-foreground">{exp.title}</h3>
-                    <p className="text-muted-foreground">{exp.company}</p>
-                    <Badge variant="outline" className="mt-2">{exp.type}</Badge>
+        {/* Feedback Section */}
+        <div className="max-w-6xl mx-auto mt-16">
+          <Card className="p-6">
+            <h3 className="text-xl font-semibold text-foreground mb-6 text-center">Share Your Feedback</h3>
+            <form onSubmit={handleFeedbackSubmit} className="space-y-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <Input
+                  placeholder="Your Name"
+                  value={feedbackData.name}
+                  onChange={(e) => setFeedbackData({ ...feedbackData, name: e.target.value })}
+                  required
+                />
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-muted-foreground">Rating:</span>
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star
+                        key={star}
+                        className={`w-5 h-5 cursor-pointer ${
+                          star <= feedbackData.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
+                        }`}
+                        onClick={() => setFeedbackData({ ...feedbackData, rating: star })}
+                      />
+                    ))}
                   </div>
-                  <p className="text-muted-foreground font-medium">{exp.duration}</p>
                 </div>
-                <ul className="space-y-2 text-muted-foreground">
-                  {exp.description.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </Card>
-            ))}
-          </div>
+              </div>
+              <Textarea
+                placeholder="Your feedback..."
+                rows={3}
+                value={feedbackData.comment}
+                onChange={(e) => setFeedbackData({ ...feedbackData, comment: e.target.value })}
+                required
+              />
+              <Button type="submit" className="w-full">Submit Feedback</Button>
+            </form>
+          </Card>
         </div>
       </section>
 
       {/* Certifications Section */}
-      <section id="certifications" className="py-16 px-4 bg-muted/50">
+      <section id="certifications" className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-foreground mb-12 text-center">Certifications</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -282,72 +461,44 @@ const WebMode = () => {
             ))}
           </div>
         </div>
-      </section>
 
-      {/* Hire Me Section */}
-      <section id="hire" className="py-16 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-foreground mb-12 text-center">Hire Me</h2>
-          
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <Card className="p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <Briefcase className="w-8 h-8 text-primary" />
-                <h3 className="text-xl font-semibold text-foreground">Backend Developer</h3>
+        {/* Feedback Section */}
+        <div className="max-w-6xl mx-auto mt-16">
+          <Card className="p-6">
+            <h3 className="text-xl font-semibold text-foreground mb-6 text-center">Share Your Feedback</h3>
+            <form onSubmit={handleFeedbackSubmit} className="space-y-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <Input
+                  placeholder="Your Name"
+                  value={feedbackData.name}
+                  onChange={(e) => setFeedbackData({ ...feedbackData, name: e.target.value })}
+                  required
+                />
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-muted-foreground">Rating:</span>
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star
+                        key={star}
+                        className={`w-5 h-5 cursor-pointer ${
+                          star <= feedbackData.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
+                        }`}
+                        onClick={() => setFeedbackData({ ...feedbackData, rating: star })}
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
-              <p className="text-muted-foreground mb-4">
-                Specialized in Node.js, Express.js, MongoDB, PostgreSQL, and RESTful APIs
-              </p>
-              <p className="text-lg font-medium text-green-600">Minimum Stipend: ₹15,000/month</p>
-            </Card>
-
-            <Card className="p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <Code className="w-8 h-8 text-primary" />
-                <h3 className="text-xl font-semibold text-foreground">Frontend Developer</h3>
-              </div>
-              <p className="text-muted-foreground mb-4">
-                Expert in React.js, Next.js, TypeScript, Tailwind CSS, and modern UI/UX
-              </p>
-              <p className="text-lg font-medium text-green-600">Minimum Stipend: ₹15,000/month</p>
-            </Card>
-
-            <Card className="p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <ExternalLink className="w-8 h-8 text-primary" />
-                <h3 className="text-xl font-semibold text-foreground">Full Stack Developer</h3>
-              </div>
-              <p className="text-muted-foreground mb-4">
-                Complete web development solutions with MERN/PERN stack expertise
-              </p>
-              <p className="text-lg font-medium text-green-600">Minimum Stipend: ₹15,000/month</p>
-            </Card>
-
-            <Card className="p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <Github className="w-8 h-8 text-primary" />
-                <h3 className="text-xl font-semibold text-foreground">Java Developer</h3>
-              </div>
-              <p className="text-muted-foreground mb-4">
-                Strong foundation in Core Java, Spring Boot, and enterprise applications
-              </p>
-              <p className="text-lg font-medium text-green-600">Minimum Stipend: ₹15,000/month</p>
-            </Card>
-          </div>
-
-          <div className="text-center">
-            <h3 className="text-xl font-semibold text-foreground mb-6">Ready to start working together?</h3>
-            <div className="flex justify-center gap-4">
-              <Button onClick={openWhatsApp} className="flex items-center gap-2 bg-green-600 hover:bg-green-700">
-                <MessageCircle className="w-4 h-4" />
-                Chat on WhatsApp
-              </Button>
-              <Button onClick={() => scrollToSection('contact')} variant="outline" className="flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                Contact Me
-              </Button>
-            </div>
-          </div>
+              <Textarea
+                placeholder="Your feedback..."
+                rows={3}
+                value={feedbackData.comment}
+                onChange={(e) => setFeedbackData({ ...feedbackData, comment: e.target.value })}
+                required
+              />
+              <Button type="submit" className="w-full">Submit Feedback</Button>
+            </form>
+          </Card>
         </div>
       </section>
 
