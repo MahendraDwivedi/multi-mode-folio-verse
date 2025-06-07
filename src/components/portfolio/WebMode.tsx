@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -68,8 +67,8 @@ const WebMode = () => {
     document.body.removeChild(link);
   };
 
-  // Skills data for charts
-  const skillsData = portfolioData.skills.technical.slice(0, 8).map((skill, index) => ({
+  // Skills data for charts - updated to include Flutter and Dart
+  const skillsData = portfolioData.skills.technical.slice(0, 10).map((skill, index) => ({
     name: skill,
     proficiency: Math.floor(Math.random() * 30) + 70,
     projects: Math.floor(Math.random() * 15) + 5
@@ -95,33 +94,36 @@ const WebMode = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-40 bg-background/90 backdrop-blur-sm border-b border-border">
-        <div className="max-w-6xl mx-auto px-4 py-3 sm:py-4 flex items-center justify-between">
-          <h1 className="text-lg sm:text-xl font-bold text-foreground truncate">{portfolioData.about.name}</h1>
+      {/* Navigation - Fixed header overlap issue */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
+        <div className="max-w-6xl mx-auto px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-between">
+          <h1 className="text-sm sm:text-lg md:text-xl font-bold text-foreground truncate max-w-[150px] sm:max-w-none">
+            {portfolioData.about.name}
+          </h1>
           
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center gap-2">
-            <Button size="sm" variant="outline" onClick={downloadResume} className="flex items-center gap-1">
+          <div className="md:hidden flex items-center gap-1 sm:gap-2">
+            <Button size="sm" variant="outline" onClick={downloadResume} className="flex items-center gap-1 px-2 py-1">
               <Download className="w-3 h-3" />
-              <span className="hidden xs:inline">Resume</span>
+              <span className="hidden xs:inline text-xs">Resume</span>
             </Button>
             <Button
               size="sm"
               variant="ghost"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="px-2"
             >
               {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </Button>
           </div>
 
           {/* Desktop navigation */}
-          <div className="hidden md:flex items-center gap-4 lg:gap-6">
+          <div className="hidden md:flex items-center gap-3 lg:gap-6">
             {navigation.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
+                className={`text-xs lg:text-sm font-medium transition-colors hover:text-primary ${
                   activeSection === item.id ? 'text-primary' : 'text-muted-foreground'
                 }`}
               >
@@ -130,16 +132,16 @@ const WebMode = () => {
             ))}
           </div>
 
-          <Button size="sm" className="hidden md:flex items-center gap-2" onClick={downloadResume}>
-            <Download className="w-4 h-4" />
+          <Button size="sm" className="hidden md:flex items-center gap-2 text-xs lg:text-sm" onClick={downloadResume}>
+            <Download className="w-3 h-3 lg:w-4 lg:h-4" />
             Resume
           </Button>
         </div>
 
         {/* Mobile navigation menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-sm border-b border-border">
-            <div className="px-4 py-2 space-y-2">
+          <div className="md:hidden absolute top-full left-0 right-0 bg-background/98 backdrop-blur-md border-b border-border shadow-lg">
+            <div className="px-3 py-2 space-y-1">
               {navigation.map((item) => (
                 <button
                   key={item.id}
@@ -158,8 +160,8 @@ const WebMode = () => {
         )}
       </nav>
 
-      {/* Hero Section - Responsive Layout */}
-      <section id="about" className="pt-16 sm:pt-20 pb-8 sm:pb-16 px-4">
+      {/* Hero Section */}
+      <section id="about" className="pt-14 sm:pt-16 md:pt-20 pb-8 sm:pb-16 px-3 sm:px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center py-10 sm:py-20">
             {/* Profile Image */}
@@ -204,7 +206,7 @@ const WebMode = () => {
       </section>
 
       {/* Education Section */}
-      <section id="academics" className="py-8 sm:py-16 px-4 bg-muted/50">
+      <section id="academics" className="py-8 sm:py-16 px-3 sm:px-4 bg-muted/50">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-8 sm:mb-12 text-center">Education</h2>
           <div className="space-y-4 sm:space-y-6">
@@ -231,88 +233,97 @@ const WebMode = () => {
         </div>
       </section>
 
-      {/* Enhanced Skills Section with Charts */}
-      <section id="skills" className="py-8 sm:py-16 px-4">
+      {/* Enhanced Skills Section with Charts - Fixed responsiveness */}
+      <section id="skills" className="py-8 sm:py-16 px-3 sm:px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-8 sm:mb-12 text-center">Skills & Expertise</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-6 sm:mb-8 md:mb-12 text-center">Skills & Expertise</h2>
           
-          {/* Skills Charts */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
-            <Card className="p-4 sm:p-6">
-              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-4 sm:mb-6">Technical Proficiency</h3>
-              <ChartContainer config={chartConfig} className="h-64 sm:h-80">
-                <ResponsiveContainer>
-                  <BarChart data={skillsData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-                    <XAxis 
-                      dataKey="name" 
-                      angle={-45}
-                      textAnchor="end"
-                      height={80}
-                      fontSize={10}
-                      interval={0}
-                    />
-                    <YAxis fontSize={10} />
-                    <ChartTooltip content={<ChartTooltipContent />} />
-                    <Bar dataKey="proficiency" fill="var(--color-proficiency)" radius={4} />
-                  </BarChart>
-                </ResponsiveContainer>
-              </ChartContainer>
+          {/* Skills Charts - Fixed mobile responsiveness */}
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8 md:mb-12">
+            <Card className="p-3 sm:p-4 lg:p-6 w-full">
+              <h3 className="text-base sm:text-lg lg:text-xl font-semibold text-foreground mb-3 sm:mb-4 lg:mb-6">Technical Proficiency</h3>
+              <div className="w-full overflow-hidden">
+                <ChartContainer config={chartConfig} className="h-48 sm:h-64 lg:h-80 w-full">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart 
+                      data={skillsData} 
+                      margin={{ top: 10, right: 10, left: 0, bottom: 60 }}
+                    >
+                      <XAxis 
+                        dataKey="name" 
+                        angle={-45}
+                        textAnchor="end"
+                        height={60}
+                        fontSize={8}
+                        interval={0}
+                        tick={{ fontSize: 8 }}
+                      />
+                      <YAxis fontSize={8} tick={{ fontSize: 8 }} />
+                      <ChartTooltip content={<ChartTooltipContent />} />
+                      <Bar dataKey="proficiency" fill="var(--color-proficiency)" radius={2} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </ChartContainer>
+              </div>
             </Card>
 
-            <Card className="p-4 sm:p-6">
-              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-4 sm:mb-6">Skill Distribution</h3>
-              <ChartContainer config={chartConfig} className="h-64 sm:h-80">
-                <ResponsiveContainer>
-                  <PieChart>
-                    <Pie
-                      data={skillCategories}
-                      cx="50%"
-                      cy="50%"
-                      outerRadius={60}
-                      dataKey="value"
-                      label={({ name, value }) => `${name}: ${value}%`}
-                      fontSize={10}
-                    >
-                      {skillCategories.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
-                    </Pie>
-                    <ChartTooltip content={<ChartTooltipContent />} />
-                  </PieChart>
-                </ResponsiveContainer>
-              </ChartContainer>
+            <Card className="p-3 sm:p-4 lg:p-6 w-full">
+              <h3 className="text-base sm:text-lg lg:text-xl font-semibold text-foreground mb-3 sm:mb-4 lg:mb-6">Skill Distribution</h3>
+              <div className="w-full overflow-hidden">
+                <ChartContainer config={chartConfig} className="h-48 sm:h-64 lg:h-80 w-full">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={skillCategories}
+                        cx="50%"
+                        cy="50%"
+                        outerRadius="70%"
+                        dataKey="value"
+                        label={({ name, value }) => `${name}: ${value}%`}
+                        fontSize={8}
+                        labelLine={false}
+                      >
+                        {skillCategories.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        ))}
+                      </Pie>
+                      <ChartTooltip content={<ChartTooltipContent />} />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </ChartContainer>
+              </div>
             </Card>
           </div>
 
-          {/* Skills Lists */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            <Card className="p-4 sm:p-6">
-              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-3 sm:mb-4">Technical Skills</h3>
+          {/* Skills Lists - Improved mobile layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+            <Card className="p-3 sm:p-4 lg:p-6 w-full">
+              <h3 className="text-base sm:text-lg lg:text-xl font-semibold text-foreground mb-3 sm:mb-4">Technical Skills</h3>
               <div className="flex flex-wrap gap-1 sm:gap-2">
                 {portfolioData.skills.technical.map((skill, index) => (
-                  <Badge key={index} className="bg-primary/10 text-primary hover:bg-primary/20 text-xs sm:text-sm">
+                  <Badge key={index} className="bg-primary/10 text-primary hover:bg-primary/20 text-xs">
                     {skill}
                   </Badge>
                 ))}
               </div>
             </Card>
             
-            <Card className="p-4 sm:p-6">
-              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-3 sm:mb-4">Soft Skills</h3>
+            <Card className="p-3 sm:p-4 lg:p-6 w-full">
+              <h3 className="text-base sm:text-lg lg:text-xl font-semibold text-foreground mb-3 sm:mb-4">Soft Skills</h3>
               <div className="flex flex-wrap gap-1 sm:gap-2">
                 {portfolioData.skills.soft.map((skill, index) => (
-                  <Badge key={index} variant="secondary" className="text-xs sm:text-sm">
+                  <Badge key={index} variant="secondary" className="text-xs">
                     {skill}
                   </Badge>
                 ))}
               </div>
             </Card>
 
-            <Card className="p-4 sm:p-6 sm:col-span-2 lg:col-span-1">
-              <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-3 sm:mb-4">Languages</h3>
+            <Card className="p-3 sm:p-4 lg:p-6 w-full md:col-span-2 xl:col-span-1">
+              <h3 className="text-base sm:text-lg lg:text-xl font-semibold text-foreground mb-3 sm:mb-4">Languages</h3>
               <div className="flex flex-wrap gap-1 sm:gap-2">
                 {portfolioData.skills.languages.map((lang, index) => (
-                  <Badge key={index} variant="outline" className="text-xs sm:text-sm">
+                  <Badge key={index} variant="outline" className="text-xs">
                     {lang}
                   </Badge>
                 ))}
@@ -323,7 +334,7 @@ const WebMode = () => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-8 sm:py-16 px-4 bg-muted/50">
+      <section id="projects" className="py-8 sm:py-16 px-3 sm:px-4 bg-muted/50">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-8 sm:mb-12 text-center">Featured Projects</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -366,7 +377,7 @@ const WebMode = () => {
       </section>
 
       {/* Certifications Section */}
-      <section id="certifications" className="py-8 sm:py-16 px-4">
+      <section id="certifications" className="py-8 sm:py-16 px-3 sm:px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-8 sm:mb-12 text-center">Certifications</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -388,7 +399,7 @@ const WebMode = () => {
       </section>
 
       {/* Contact Section with Feedback */}
-      <section id="contact" className="py-8 sm:py-16 px-4 bg-muted/50">
+      <section id="contact" className="py-8 sm:py-16 px-3 sm:px-4 bg-muted/50">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-8 sm:mb-12 text-center">Get In Touch</h2>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -499,7 +510,7 @@ const WebMode = () => {
       </section>
 
       {/* Floating Buttons */}
-      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col gap-2">
+      <div className="fixed bottom-3 right-3 sm:bottom-4 sm:right-4 lg:bottom-6 lg:right-6 z-40 flex flex-col gap-2">
         <Button
           onClick={openWhatsApp}
           className="rounded-full w-12 h-12 sm:w-14 sm:h-14 bg-green-600 hover:bg-green-700 shadow-lg"
@@ -517,7 +528,7 @@ const WebMode = () => {
       </div>
 
       {/* Footer */}
-      <footer className="py-6 sm:py-8 px-4 bg-muted/50 border-t border-border">
+      <footer className="py-4 sm:py-6 lg:py-8 px-3 sm:px-4 bg-muted/50 border-t border-border">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-sm sm:text-base text-muted-foreground">
             © 2024 {portfolioData.about.name}. All rights reserved.

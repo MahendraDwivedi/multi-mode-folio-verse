@@ -1,4 +1,3 @@
-
 export interface PortfolioData {
   about: {
     name: string;
@@ -95,15 +94,18 @@ export const portfolioData: PortfolioData = {
   skills: {
     technical: [
       "JavaScript", "React", "Node.js", "HTML/CSS", "C++", "Python", 
-      "Git", "MongoDB", "Express.js", "Vercel Deployment", "Web Development", "UI/UX Design"
+      "Git", "MongoDB", "Express.js", "Vercel Deployment", "Web Development", "UI/UX Design",
+      "Flutter", "Dart"
     ],
     soft: [
       "Problem Solving", "Creative Thinking", "Team Collaboration", "Communication", 
       "Project Management", "Adaptability", "Learning Agility"
     ],
-    languages: ["Hindi (Native)", "English (Fluent)", "Java", "JavaScript", "Python", "C/C++"],
-    frontend: ["React", "Tailwind CSS", "HTML", "CSS"],
-    backend: ["Node.js", "Springboot"],
+    languages: ["Hindi (Native)", "English (Fluent)", "Java", "JavaScript", "Python", "C/C++", "Dart"],
+    frontend: ["React", "Tailwind CSS", "HTML", "CSS", "Flutter"],
+    backend: [
+      "Node.js", "Springboot"
+    ],
     databases: ["MySQL", "MongoDB", "Firebase"],
     os: ["Debian", "Ubuntu", "Windows"],
     otherTools: ["Postman", "Git", "Vite"]
