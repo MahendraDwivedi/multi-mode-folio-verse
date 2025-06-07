@@ -28,9 +28,9 @@ const Index = () => {
     <div className={`min-h-screen transition-colors duration-300 ${
       currentMode === 'terminal' ? 'terminal-bg' : 'bg-background'
     }`}>
-      {/* Mode Switcher */}
-      <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
-        <Card className="p-1 flex items-center gap-1 bg-background/90 backdrop-blur-sm border border-border/50">
+      {/* Mode Switcher - Fixed positioning with higher z-index */}
+      <div className="fixed top-4 right-4 z-[100] flex items-center gap-2">
+        <Card className="p-1 flex items-center gap-1 bg-background/95 backdrop-blur-sm border border-border/50 shadow-lg">
           {modes.map((mode) => {
             const Icon = mode.icon;
             return (
@@ -39,7 +39,7 @@ const Index = () => {
                 variant={currentMode === mode.id ? "default" : "ghost"}
                 size="sm"
                 onClick={() => setCurrentMode(mode.id)}
-                className="flex items-center gap-1 text-xs"
+                className="flex items-center gap-1 text-xs min-w-[60px]"
               >
                 <Icon className="w-3 h-3" />
                 {mode.label}
@@ -52,7 +52,7 @@ const Index = () => {
           variant="outline"
           size="sm"
           onClick={toggleTheme}
-          className="bg-background/90 backdrop-blur-sm"
+          className="bg-background/95 backdrop-blur-sm shadow-lg"
         >
           {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
         </Button>

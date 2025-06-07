@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -13,6 +12,8 @@ interface WindowState {
   isMinimized: boolean;
   isOpen: boolean;
   zIndex: number;
+  left?: number;
+  top?: number;
 }
 
 type WindowType = 'about' | 'skills' | 'projects' | 'experience' | 'academics' | 'certifications' | 'hire' | 'contact';
@@ -36,15 +37,30 @@ const GUIMode = () => {
     message: ''
   });
 
+  const getWindowCenter = () => {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    const windowWidth = 600; // Default window width
+    const windowHeight = 400; // Default window height
+    
+    return {
+      left: Math.max(16, (screenWidth - windowWidth) / 2),
+      top: Math.max(80, (screenHeight - windowHeight) / 2)
+    };
+  };
+
   const openWindow = (windowType: WindowType) => {
     console.log('Opening window:', windowType);
+    const centerPos = getWindowCenter();
     setWindowStates(prev => ({
       ...prev,
       [windowType]: { 
         isMaximized: false, 
         isMinimized: false, 
         isOpen: true, 
-        zIndex: nextZIndex 
+        zIndex: nextZIndex,
+        left: centerPos.left,
+        top: centerPos.top
       }
     }));
     setNextZIndex(prev => prev + 1);
@@ -127,17 +143,24 @@ const GUIMode = () => {
     
     if (!state.isOpen) return null;
 
+    const windowStyle = state.isMaximized 
+      ? { left: 16, top: 16, right: 16, bottom: 80 }
+      : { 
+          left: state.left || getWindowCenter().left, 
+          top: state.top || getWindowCenter().top,
+          width: '600px',
+          maxWidth: 'calc(100vw - 32px)'
+        };
+
     return (
       <div 
         className={`
           bg-white border-2 border-gray-400 shadow-lg absolute
-          ${state.isMaximized ? 'inset-4' : 'w-full max-w-4xl'}
           ${state.isMinimized ? 'h-8' : 'min-h-64'}
           ${className}
         `}
         style={{
-          left: state.isMaximized ? 16 : Math.min(window.innerWidth - 600, 50 + Math.random() * 200),
-          top: state.isMaximized ? 16 : Math.min(window.innerHeight - 400, 150 + Math.random() * 100),
+          ...windowStyle,
           zIndex: state.zIndex,
         }}
         onClick={() => bringToFront(windowType)}
@@ -191,8 +214,8 @@ const GUIMode = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-teal-400 to-blue-600 p-4 relative">
-      {/* Desktop Icons */}
-      <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-6 mb-4 relative z-0 pt-4">
+      {/* Desktop Icons - Adjusted top padding to avoid overlap with mode switcher */}
+      <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-6 mb-4 relative z-0 pt-16">
         {[
           { type: 'about' as WindowType, icon: '👤', label: 'About' },
           { type: 'skills' as WindowType, icon: '🛠️', label: 'Skills' },
