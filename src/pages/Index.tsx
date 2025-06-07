@@ -28,40 +28,10 @@ const Index = () => {
     <div className={`min-h-screen transition-colors duration-300 ${
       currentMode === 'terminal' ? 'terminal-bg' : 'bg-background'
     }`}>
-      {/* Mode Switcher - Moved to bottom right */}
-      <div className="fixed bottom-20 right-4 z-[100] flex flex-col items-end gap-2">
-        <Card className="p-1 flex items-center gap-1 bg-background/95 backdrop-blur-sm border border-border/50 shadow-lg">
-          {modes.map((mode) => {
-            const Icon = mode.icon;
-            return (
-              <Button
-                key={mode.id}
-                variant={currentMode === mode.id ? "default" : "ghost"}
-                size="sm"
-                onClick={() => setCurrentMode(mode.id)}
-                className="flex items-center gap-1 text-xs min-w-[60px]"
-              >
-                <Icon className="w-3 h-3" />
-                {mode.label}
-              </Button>
-            );
-          })}
-        </Card>
-        
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={toggleTheme}
-          className="bg-background/95 backdrop-blur-sm shadow-lg"
-        >
-          {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-        </Button>
-      </div>
-
       {/* Render Current Mode */}
       {currentMode === 'gui' && <GUIMode />}
       {currentMode === 'terminal' && <TerminalMode />}
-      {currentMode === 'web' && <WebMode />}
+      {currentMode === 'web' && <WebMode modes={modes} currentMode={currentMode} setCurrentMode={setCurrentMode} isDarkMode={isDarkMode} toggleTheme={toggleTheme} />}
     </div>
   );
 };

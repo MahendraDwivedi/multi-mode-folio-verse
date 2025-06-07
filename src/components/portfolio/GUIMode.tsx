@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -145,23 +144,22 @@ const GUIMode = () => {
     if (!state.isOpen) return null;
 
     const windowStyle = state.isMaximized 
-      ? { left: 16, top: 16, right: 16, bottom: 80 }
+      ? { left: 0, top: 0, right: 0, bottom: 0 }
       : { 
-          left: state.left || getWindowCenter().left, 
-          top: state.top || getWindowCenter().top,
-          width: '600px',
-          maxWidth: 'calc(100vw - 32px)'
+          left: 0,
+          top: 0,
+          right: 0,
+          bottom: 0
         };
 
     return (
       <div 
         className={`
-          bg-white border-2 border-gray-400 shadow-lg absolute
-          ${state.isMinimized ? 'h-8' : 'min-h-64'}
+          bg-white border-2 border-gray-400 shadow-lg fixed inset-0
+          ${state.isMinimized ? 'h-8' : 'h-full'}
           ${className}
         `}
         style={{
-          ...windowStyle,
           zIndex: state.zIndex,
         }}
         onClick={() => bringToFront(windowType)}
@@ -205,7 +203,7 @@ const GUIMode = () => {
           </div>
         </div>
         {!state.isMinimized && (
-          <div className="p-4 overflow-auto max-h-96 bg-white">
+          <div className="p-4 overflow-auto h-[calc(100%-2rem)] bg-white">
             {children}
           </div>
         )}
