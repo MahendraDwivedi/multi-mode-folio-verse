@@ -28,8 +28,8 @@ const Index = () => {
     <div className={`min-h-screen transition-colors duration-300 ${
       currentMode === 'terminal' ? 'terminal-bg' : 'bg-background'
     }`}>
-      {/* Mode Switcher - Fixed positioning with higher z-index */}
-      <div className="fixed top-4 right-4 z-[100] flex items-center gap-2">
+      {/* Mode Switcher - Moved to bottom right */}
+      <div className="fixed bottom-20 right-4 z-[100] flex flex-col items-end gap-2">
         <Card className="p-1 flex items-center gap-1 bg-background/95 backdrop-blur-sm border border-border/50 shadow-lg">
           {modes.map((mode) => {
             const Icon = mode.icon;

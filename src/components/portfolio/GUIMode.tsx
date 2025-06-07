@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -213,9 +214,9 @@ const GUIMode = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-400 to-blue-600 p-4 relative">
-      {/* Desktop Icons - Adjusted top padding to avoid overlap with mode switcher */}
-      <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-6 mb-4 relative z-0 pt-16">
+    <div className="min-h-screen h-screen bg-gradient-to-br from-teal-400 to-blue-600 p-4 relative overflow-hidden">
+      {/* Desktop Icons - Adjusted positioning */}
+      <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-4 sm:gap-6 mb-4 relative z-0 pt-4 pb-20">
         {[
           { type: 'about' as WindowType, icon: '👤', label: 'About' },
           { type: 'skills' as WindowType, icon: '🛠️', label: 'Skills' },
@@ -234,10 +235,10 @@ const GUIMode = () => {
               openWindow(item.type);
             }}
           >
-            <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center text-3xl group-hover:bg-blue-200 transition-colors shadow-md">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-100 rounded-lg flex items-center justify-center text-2xl sm:text-3xl group-hover:bg-blue-200 transition-colors shadow-md">
               {item.icon}
             </div>
-            <span className="text-white text-sm mt-2 text-center font-medium drop-shadow-md">{item.label}</span>
+            <span className="text-white text-xs sm:text-sm mt-2 text-center font-medium drop-shadow-md">{item.label}</span>
           </div>
         ))}
       </div>
@@ -254,7 +255,7 @@ const GUIMode = () => {
             Resume
           </Button>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 overflow-x-auto">
           {Object.entries(windowStates)
             .filter(([, state]) => state.isOpen)
             .map(([windowType]) => (
@@ -262,7 +263,7 @@ const GUIMode = () => {
                 key={windowType}
                 size="sm"
                 variant="outline"
-                className="text-xs"
+                className="text-xs whitespace-nowrap"
                 onClick={() => {
                   if (windowStates[windowType as WindowType].isMinimized) {
                     minimizeWindow(windowType as WindowType);
@@ -275,7 +276,7 @@ const GUIMode = () => {
               </Button>
             ))}
         </div>
-        <div className="text-xs">
+        <div className="text-xs hidden sm:block">
           {new Date().toLocaleTimeString()}
         </div>
       </div>
