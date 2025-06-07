@@ -12,22 +12,24 @@ interface WindowState {
   isMaximized: boolean;
   isMinimized: boolean;
   isOpen: boolean;
+  zIndex: number;
 }
 
 type WindowType = 'about' | 'skills' | 'projects' | 'experience' | 'academics' | 'certifications' | 'hire' | 'contact';
 
 const GUIMode = () => {
   const [windowStates, setWindowStates] = useState<Record<WindowType, WindowState>>({
-    about: { isMaximized: false, isMinimized: false, isOpen: true },
-    skills: { isMaximized: false, isMinimized: false, isOpen: false },
-    projects: { isMaximized: false, isMinimized: false, isOpen: false },
-    experience: { isMaximized: false, isMinimized: false, isOpen: false },
-    academics: { isMaximized: false, isMinimized: false, isOpen: false },
-    certifications: { isMaximized: false, isMinimized: false, isOpen: false },
-    hire: { isMaximized: false, isMinimized: false, isOpen: false },
-    contact: { isMaximized: false, isMinimized: false, isOpen: false }
+    about: { isMaximized: false, isMinimized: false, isOpen: true, zIndex: 10 },
+    skills: { isMaximized: false, isMinimized: false, isOpen: false, zIndex: 10 },
+    projects: { isMaximized: false, isMinimized: false, isOpen: false, zIndex: 10 },
+    experience: { isMaximized: false, isMinimized: false, isOpen: false, zIndex: 10 },
+    academics: { isMaximized: false, isMinimized: false, isOpen: false, zIndex: 10 },
+    certifications: { isMaximized: false, isMinimized: false, isOpen: false, zIndex: 10 },
+    hire: { isMaximized: false, isMinimized: false, isOpen: false, zIndex: 10 },
+    contact: { isMaximized: false, isMinimized: false, isOpen: false, zIndex: 10 }
   });
 
+  const [nextZIndex, setNextZIndex] = useState(11);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -38,8 +40,14 @@ const GUIMode = () => {
     console.log('Opening window:', windowType);
     setWindowStates(prev => ({
       ...prev,
-      [windowType]: { isMaximized: false, isMinimized: false, isOpen: true }
+      [windowType]: { 
+        isMaximized: false, 
+        isMinimized: false, 
+        isOpen: true, 
+        zIndex: nextZIndex 
+      }
     }));
+    setNextZIndex(prev => prev + 1);
   };
 
   const closeWindow = (windowType: WindowType) => {
@@ -55,9 +63,11 @@ const GUIMode = () => {
       [windowType]: { 
         ...prev[windowType], 
         isMaximized: !prev[windowType].isMaximized,
-        isMinimized: false 
+        isMinimized: false,
+        zIndex: nextZIndex
       }
     }));
+    setNextZIndex(prev => prev + 1);
   };
 
   const minimizeWindow = (windowType: WindowType) => {
@@ -68,6 +78,17 @@ const GUIMode = () => {
         isMinimized: !prev[windowType].isMinimized 
       }
     }));
+  };
+
+  const bringToFront = (windowType: WindowType) => {
+    setWindowStates(prev => ({
+      ...prev,
+      [windowType]: { 
+        ...prev[windowType], 
+        zIndex: nextZIndex
+      }
+    }));
+    setNextZIndex(prev => prev + 1);
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {
@@ -109,24 +130,29 @@ const GUIMode = () => {
     return (
       <div 
         className={`
-          bg-white border-2 border-gray-400 shadow-lg z-10
-          ${state.isMaximized ? 'fixed inset-4 z-50' : 'absolute top-20 left-4 w-full max-w-4xl'}
+          bg-white border-2 border-gray-400 shadow-lg absolute
+          ${state.isMaximized ? 'inset-4' : 'w-full max-w-4xl'}
           ${state.isMinimized ? 'h-8' : 'min-h-64'}
           ${className}
         `}
         style={{
-          left: state.isMaximized ? undefined : Math.random() * 100 + 50,
-          top: state.isMaximized ? undefined : Math.random() * 100 + 150,
+          left: state.isMaximized ? 16 : Math.min(window.innerWidth - 600, 50 + Math.random() * 200),
+          top: state.isMaximized ? 16 : Math.min(window.innerHeight - 400, 150 + Math.random() * 100),
+          zIndex: state.zIndex,
         }}
+        onClick={() => bringToFront(windowType)}
       >
-        <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-2 py-1 flex items-center justify-between">
+        <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-2 py-1 flex items-center justify-between cursor-move">
           <span className="font-bold text-sm">{title}</span>
           <div className="flex items-center gap-1">
             <Button
               size="sm"
               variant="ghost"
               className="w-6 h-6 p-0 text-white hover:bg-white/20"
-              onClick={() => minimizeWindow(windowType)}
+              onClick={(e) => {
+                e.stopPropagation();
+                minimizeWindow(windowType);
+              }}
             >
               <Minus className="w-3 h-3" />
             </Button>
@@ -134,7 +160,10 @@ const GUIMode = () => {
               size="sm"
               variant="ghost"
               className="w-6 h-6 p-0 text-white hover:bg-white/20"
-              onClick={() => maximizeWindow(windowType)}
+              onClick={(e) => {
+                e.stopPropagation();
+                maximizeWindow(windowType);
+              }}
             >
               <Square className="w-3 h-3" />
             </Button>
@@ -142,7 +171,10 @@ const GUIMode = () => {
               size="sm"
               variant="ghost"
               className="w-6 h-6 p-0 text-white hover:bg-white/20"
-              onClick={() => closeWindow(windowType)}
+              onClick={(e) => {
+                e.stopPropagation();
+                closeWindow(windowType);
+              }}
             >
               <X className="w-3 h-3" />
             </Button>
@@ -160,7 +192,7 @@ const GUIMode = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-teal-400 to-blue-600 p-4 relative">
       {/* Desktop Icons */}
-      <div className="grid grid-cols-6 gap-4 mb-4 relative z-0">
+      <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-6 mb-4 relative z-0 pt-4">
         {[
           { type: 'about' as WindowType, icon: '👤', label: 'About' },
           { type: 'skills' as WindowType, icon: '🛠️', label: 'Skills' },
@@ -173,16 +205,16 @@ const GUIMode = () => {
         ].map((item) => (
           <div
             key={item.type}
-            className="flex flex-col items-center cursor-pointer group"
-            onDoubleClick={() => {
-              console.log('Double clicked:', item.type);
+            className="flex flex-col items-center cursor-pointer group select-none"
+            onClick={() => {
+              console.log('Icon clicked:', item.type);
               openWindow(item.type);
             }}
           >
-            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-2xl group-hover:bg-blue-200 transition-colors">
+            <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center text-3xl group-hover:bg-blue-200 transition-colors shadow-md">
               {item.icon}
             </div>
-            <span className="text-white text-xs mt-1 text-center font-medium">{item.label}</span>
+            <span className="text-white text-sm mt-2 text-center font-medium drop-shadow-md">{item.label}</span>
           </div>
         ))}
       </div>
@@ -211,6 +243,8 @@ const GUIMode = () => {
                 onClick={() => {
                   if (windowStates[windowType as WindowType].isMinimized) {
                     minimizeWindow(windowType as WindowType);
+                  } else {
+                    bringToFront(windowType as WindowType);
                   }
                 }}
               >
