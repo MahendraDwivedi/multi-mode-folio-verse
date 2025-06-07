@@ -190,45 +190,6 @@ const WebMode = () => {
             ))}
           </div>
         </div>
-
-        {/* Feedback Section */}
-        <div className="max-w-6xl mx-auto mt-16">
-          <Card className="p-6">
-            <h3 className="text-xl font-semibold text-foreground mb-6 text-center">Share Your Feedback</h3>
-            <form onSubmit={handleFeedbackSubmit} className="space-y-4">
-              <div className="grid md:grid-cols-2 gap-4">
-                <Input
-                  placeholder="Your Name"
-                  value={feedbackData.name}
-                  onChange={(e) => setFeedbackData({ ...feedbackData, name: e.target.value })}
-                  required
-                />
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-muted-foreground">Rating:</span>
-                  <div className="flex gap-1">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star
-                        key={star}
-                        className={`w-5 h-5 cursor-pointer ${
-                          star <= feedbackData.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
-                        }`}
-                        onClick={() => setFeedbackData({ ...feedbackData, rating: star })}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <Textarea
-                placeholder="Your feedback..."
-                rows={3}
-                value={feedbackData.comment}
-                onChange={(e) => setFeedbackData({ ...feedbackData, comment: e.target.value })}
-                required
-              />
-              <Button type="submit" className="w-full">Submit Feedback</Button>
-            </form>
-          </Card>
-        </div>
       </section>
 
       {/* Enhanced Skills Section with Charts */}
@@ -318,45 +279,6 @@ const WebMode = () => {
             </Card>
           </div>
         </div>
-
-        {/* Feedback Section */}
-        <div className="max-w-6xl mx-auto mt-16">
-          <Card className="p-6">
-            <h3 className="text-xl font-semibold text-foreground mb-6 text-center">Share Your Feedback</h3>
-            <form onSubmit={handleFeedbackSubmit} className="space-y-4">
-              <div className="grid md:grid-cols-2 gap-4">
-                <Input
-                  placeholder="Your Name"
-                  value={feedbackData.name}
-                  onChange={(e) => setFeedbackData({ ...feedbackData, name: e.target.value })}
-                  required
-                />
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-muted-foreground">Rating:</span>
-                  <div className="flex gap-1">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star
-                        key={star}
-                        className={`w-5 h-5 cursor-pointer ${
-                          star <= feedbackData.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
-                        }`}
-                        onClick={() => setFeedbackData({ ...feedbackData, rating: star })}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <Textarea
-                placeholder="Your feedback..."
-                rows={3}
-                value={feedbackData.comment}
-                onChange={(e) => setFeedbackData({ ...feedbackData, comment: e.target.value })}
-                required
-              />
-              <Button type="submit" className="w-full">Submit Feedback</Button>
-            </form>
-          </Card>
-        </div>
       </section>
 
       {/* Projects Section */}
@@ -400,45 +322,6 @@ const WebMode = () => {
             ))}
           </div>
         </div>
-
-        {/* Feedback Section */}
-        <div className="max-w-6xl mx-auto mt-16">
-          <Card className="p-6">
-            <h3 className="text-xl font-semibold text-foreground mb-6 text-center">Share Your Feedback</h3>
-            <form onSubmit={handleFeedbackSubmit} className="space-y-4">
-              <div className="grid md:grid-cols-2 gap-4">
-                <Input
-                  placeholder="Your Name"
-                  value={feedbackData.name}
-                  onChange={(e) => setFeedbackData({ ...feedbackData, name: e.target.value })}
-                  required
-                />
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-muted-foreground">Rating:</span>
-                  <div className="flex gap-1">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star
-                        key={star}
-                        className={`w-5 h-5 cursor-pointer ${
-                          star <= feedbackData.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
-                        }`}
-                        onClick={() => setFeedbackData({ ...feedbackData, rating: star })}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <Textarea
-                placeholder="Your feedback..."
-                rows={3}
-                value={feedbackData.comment}
-                onChange={(e) => setFeedbackData({ ...feedbackData, comment: e.target.value })}
-                required
-              />
-              <Button type="submit" className="w-full">Submit Feedback</Button>
-            </form>
-          </Card>
-        </div>
       </section>
 
       {/* Certifications Section */}
@@ -461,52 +344,14 @@ const WebMode = () => {
             ))}
           </div>
         </div>
-
-        {/* Feedback Section */}
-        <div className="max-w-6xl mx-auto mt-16">
-          <Card className="p-6">
-            <h3 className="text-xl font-semibold text-foreground mb-6 text-center">Share Your Feedback</h3>
-            <form onSubmit={handleFeedbackSubmit} className="space-y-4">
-              <div className="grid md:grid-cols-2 gap-4">
-                <Input
-                  placeholder="Your Name"
-                  value={feedbackData.name}
-                  onChange={(e) => setFeedbackData({ ...feedbackData, name: e.target.value })}
-                  required
-                />
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-muted-foreground">Rating:</span>
-                  <div className="flex gap-1">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star
-                        key={star}
-                        className={`w-5 h-5 cursor-pointer ${
-                          star <= feedbackData.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
-                        }`}
-                        onClick={() => setFeedbackData({ ...feedbackData, rating: star })}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <Textarea
-                placeholder="Your feedback..."
-                rows={3}
-                value={feedbackData.comment}
-                onChange={(e) => setFeedbackData({ ...feedbackData, comment: e.target.value })}
-                required
-              />
-              <Button type="submit" className="w-full">Submit Feedback</Button>
-            </form>
-          </Card>
-        </div>
       </section>
 
-      {/* Contact Section */}
+      {/* Contact Section with Feedback */}
       <section id="contact" className="py-16 px-4 bg-muted/50">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-foreground mb-12 text-center">Get In Touch</h2>
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Contact Information */}
             <div>
               <h3 className="text-xl font-semibold text-foreground mb-6">Contact Information</h3>
               <div className="space-y-4">
@@ -533,6 +378,7 @@ const WebMode = () => {
               </div>
             </div>
 
+            {/* Contact Form */}
             <Card className="p-6">
               <h3 className="text-xl font-semibold text-foreground mb-6">Send a Message</h3>
               <form onSubmit={handleFormSubmit} className="space-y-4">
@@ -565,6 +411,41 @@ const WebMode = () => {
                 <Button type="submit" className="w-full">
                   Send Message
                 </Button>
+              </form>
+            </Card>
+
+            {/* Feedback Form */}
+            <Card className="p-6">
+              <h3 className="text-xl font-semibold text-foreground mb-6">Share Your Feedback</h3>
+              <form onSubmit={handleFeedbackSubmit} className="space-y-4">
+                <Input
+                  placeholder="Your Name"
+                  value={feedbackData.name}
+                  onChange={(e) => setFeedbackData({ ...feedbackData, name: e.target.value })}
+                  required
+                />
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-muted-foreground">Rating:</span>
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star
+                        key={star}
+                        className={`w-5 h-5 cursor-pointer ${
+                          star <= feedbackData.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
+                        }`}
+                        onClick={() => setFeedbackData({ ...feedbackData, rating: star })}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <Textarea
+                  placeholder="Your feedback..."
+                  rows={4}
+                  value={feedbackData.comment}
+                  onChange={(e) => setFeedbackData({ ...feedbackData, comment: e.target.value })}
+                  required
+                />
+                <Button type="submit" className="w-full">Submit Feedback</Button>
               </form>
             </Card>
           </div>
