@@ -156,16 +156,10 @@ export const portfolioData: PortfolioData = {
   ],
   certifications: [
     {
-      name: "Web Development Fundamentals",
-      issuer: "Online Learning Platform",
-      year: "2023",
-      credentialId: "WEB-2023-001"
-    },
-    {
-      name: "React Development",
-      issuer: "Technical Institute",
-      year: "2023",
-      credentialId: "REACT-2023-456"
+      name: "Complete Java Programming and Certification Guide",
+      issuer: "Udemy",
+      year: "2025",
+      credentialId: "UC-4e5ef2b4-102e-4401-9341-532e17b79592"
     }
   ],
   experience: [
@@ -192,7 +186,6 @@ export const portfolioData: PortfolioData = {
     phone: "+91 9580187515",
     linkedin: "https://www.linkedin.com/in/mahendra-dwivedi-a35132249/",
     github: "https://github.com/MahendraDwivedi",
-    
-    leetcode: "https://leetcode.com/u/MahendraDwivedi/"
+    leetcode: "https://leetcode.com/u/mahendradwivedi07/"
   }
 };
