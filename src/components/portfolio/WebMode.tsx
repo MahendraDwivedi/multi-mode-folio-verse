@@ -16,7 +16,7 @@ import WhatsAppButton from './WhatsAppButton';
 type PortfolioMode = 'gui' | 'terminal' | 'web';
 
 interface WebModeProps {
-  modes: { id: PortfolioMode; label: string; icon: React.ComponentType }[];
+  modes: { id: PortfolioMode; label: string; icon: React.ComponentType<any> }[];
   currentMode: PortfolioMode;
   setCurrentMode: (mode: PortfolioMode) => void;
   isDarkMode: boolean;

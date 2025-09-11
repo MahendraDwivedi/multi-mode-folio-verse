@@ -252,6 +252,18 @@ const GUIMode = () => {
             <Download className="w-4 h-4 mr-1" />
             Resume
           </Button>
+          <Button
+            size="sm"
+            variant="outline"
+            className="text-white border-white hover:bg-white hover:text-gray-800"
+            onClick={() => {
+              // Navigate back to web mode
+              const event = new CustomEvent('changeMode', { detail: 'web' });
+              window.dispatchEvent(event);
+            }}
+          >
+            ← Back to Web
+          </Button>
         </div>
         <div className="flex items-center gap-1 overflow-x-auto">
           {Object.entries(windowStates)

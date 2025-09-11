@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Monitor, Terminal, Globe, Sun, Moon } from 'lucide-react';
@@ -17,6 +17,19 @@ const Index = () => {
     setIsDarkMode(!isDarkMode);
     document.documentElement.classList.toggle('dark');
   };
+
+  // Listen for mode change events from child components
+  useEffect(() => {
+    const handleModeChange = (event: CustomEvent) => {
+      setCurrentMode(event.detail);
+    };
+    
+    window.addEventListener('changeMode' as any, handleModeChange);
+    
+    return () => {
+      window.removeEventListener('changeMode' as any, handleModeChange);
+    };
+  }, []);
 
   const modes = [
     { id: 'gui' as const, label: 'GUI', icon: Monitor },

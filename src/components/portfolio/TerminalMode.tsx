@@ -354,6 +354,17 @@ ${portfolioData.contact.website ? `Website: ${portfolioData.contact.website}` : 
         <div className="flex gap-3 mt-3">
           <Button
             variant="outline"
+            className="bg-black/40 border-white/30 text-white hover:bg-white/10 hover:border-white transition-all font-mono text-sm"
+            onClick={() => {
+              // Navigate back to web mode
+              const event = new CustomEvent('changeMode', { detail: 'web' });
+              window.dispatchEvent(event);
+            }}
+          >
+            ← Back to Web
+          </Button>
+          <Button
+            variant="outline"
             className="bg-black/40 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-400 transition-all font-mono text-sm"
             onClick={() => handleCommandClick('help')}
           >

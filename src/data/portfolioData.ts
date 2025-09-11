@@ -69,8 +69,8 @@ export interface PortfolioData {
 export const portfolioData: PortfolioData = {
   about: {
     name: "Mahendra Kumar Dwivedi",
-    title: "B.Tech Student | Software Developer",
-    description: "Passionate B.Tech student with a keen interest in software development and creative design. Currently pursuing Computer Science Engineering with a focus on web development and modern technologies.",
+    title: "B.Tech Student | Software Developer | Aspiring Java Developer",
+    description: "Passionate B.Tech student with a keen interest in software development and creative design. Currently pursuing Computer Science Engineering with a focus on web development and modern technologies. Aspiring Java Developer with a strong foundation in object-oriented programming and enterprise application development.",
     location: "Sonbhadra, Uttar Pradesh",
     email: "dwivedimahendra9876@gmail.com",
     phone: "+91 9580187515",
@@ -121,11 +121,11 @@ export const portfolioData: PortfolioData = {
     languages: ["Hindi (Native)", "English (Fluent)", "Java", "JavaScript", "Python", "C/C++", "Dart"],
     frontend: ["React", "Tailwind CSS", "HTML", "CSS", "Flutter"],
     backend: [
-      "Node.js", "Springboot"
+      "Node.js", "Spring Boot", "Java", "Spring Framework", "Spring MVC", "Spring Data JPA", "Hibernate", "Maven", "RESTful APIs", "Microservices"
     ],
-    databases: ["MySQL", "MongoDB", "Firebase"],
+    databases: ["MySQL", "MongoDB", "Firebase", "PostgreSQL", "JDBC"],
     os: ["Debian", "Ubuntu", "Windows"],
-    otherTools: ["Postman", "Git", "Vite"]
+    otherTools: ["Postman", "Git", "Vite", "IntelliJ IDEA", "Eclipse", "VS Code", "JUnit", "Mockito"]
   },
   projects: [
     {
@@ -170,27 +170,6 @@ export const portfolioData: PortfolioData = {
   ],
   experience: [
     {
-      title: "Core Team Member",
-      company: "Google Developer Group",
-      duration: "Jul 2024 - Present",
-      description: [
-        "Conducted sessions on problem solving techniques, algorithm optimization, and coding best practices",
-        "Organized several virtual contests and hackathons",
-        "Helping beginners understand complex topics"
-      ],
-      type: "job"
-    },
-    {
-      title: "College Website Maintenance Team",
-      company: "Rajkiya Engineering College",
-      duration: "Aug 2024 - Present",
-      description: [
-        "Learned the fundamentals of Version Control Like Git and Github and about Real-World Project Management",
-        "Learned to troubleshoot and resolve issues related to user experience, website functionality"
-      ],
-      type: "job"
-    },
-    {
       title: "Web Development Projects",
       company: "Personal Projects",
       duration: "2022 - Present",
@@ -213,7 +192,7 @@ export const portfolioData: PortfolioData = {
     phone: "+91 9580187515",
     linkedin: "https://www.linkedin.com/in/mahendra-dwivedi-a35132249/",
     github: "https://github.com/MahendraDwivedi",
-    website: "https://mahendra-portfolio.vercel.app",
+    
     leetcode: "https://leetcode.com/u/MahendraDwivedi/"
   }
 };
