@@ -147,11 +147,12 @@ export const portfolioData: PortfolioData = {
       featured: true
     },
     {
-      title: "Maleria Tracker",
-      description: "Real-time malaria tracking and data visualization for early detection and prevention. Developed a full-stack web application using React (frontend), Express.js (backend), and MongoDB (database). Designed a state-and district-level tracking system for malaria cases, including active cases, total cases, and recoveries. Built a hospital-based data entry system in which hospitals update case details in real time. Ensured secure API communication and authentication for authorized hospital data entry.",
-      techStack: ["React", "Express.js", "MongoDB", "Node.js", "Data Visualization"],
-      githubUrl: "https://github.com/MahendraDwivedi/maleria-tracker",
-      image: "photo-1576091160399-112ba8d25d1f"
+      title: "PrimeDrive – Let's Drive",
+      description: "Developed a full-stack car rental web app enabling owners to list/manage vehicles and users to book cars with real-time availability. Built secure REST APIs (Node.js, Express, MongoDB) for vehicle/booking management with JWT authentication & role-based access. Designed responsive UI (React, TailwindCSS, Recharts) with dashboards showing overall monthly bookings (guests) and owner-specific bookings & revenue (logged-in users). Implemented booking system with pickup/return dates, dynamic pricing, statuses (pending/confirmed/cancelled), and owner dashboard with customer details (name, email, phone). Optimized queries with MongoDB aggregation pipelines for monthly analytics, ensuring scalable and efficient reporting.",
+      techStack: ["React", "Node.js", "Express", "MongoDB", "TailwindCSS", "Recharts"],
+      githubUrl: "https://github.com/MahendraDwivedi/PrimeDrive2.0",
+      demoUrl: "https://primedrive-lake.vercel.app/",
+      image: "photo-1449824913935-59a10b8d2000"
     }
   ],
   certifications: [
