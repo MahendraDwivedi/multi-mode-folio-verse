@@ -160,6 +160,18 @@ export const portfolioData: PortfolioData = {
       issuer: "Udemy",
       year: "2025",
       credentialId: "UC-4e5ef2b4-102e-4401-9341-532e17b79592"
+    },
+    {
+      name: "Flutter Zero To Hero - Complete Crash Course For Beginners",
+      issuer: "Udemy",
+      year: "2025",
+      credentialId: "UC-0af8cfb7-b768-4ab9-8697-d1fdfa5d58a9"
+    },
+    {
+      name: "Technology Job Simulation",
+      issuer: "Deloitte",
+      year: "2025",
+      credentialId: "2raWSqLZJ3AgK6nNv"
     }
   ],
   experience: [
