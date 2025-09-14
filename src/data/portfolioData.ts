@@ -69,8 +69,8 @@ export interface PortfolioData {
 export const portfolioData: PortfolioData = {
   about: {
     name: "Mahendra Kumar Dwivedi",
-    title: "B.Tech Student | Software Developer | Aspiring Java Developer",
-    description: "Passionate B.Tech student with a keen interest in software development and creative design. Currently pursuing Computer Science Engineering with a focus on web development and modern technologies. Aspiring Java Developer with a strong foundation in object-oriented programming and enterprise application development.",
+    title: "Software Developer | Java Expert | Full Stack MERN Developer",
+    description: "Experienced Software Developer with expertise in Java and full stack development using the MERN stack (MongoDB, Express.js, React, Node.js). Currently pursuing B.Tech in Computer Science Engineering with hands-on experience in building scalable web applications, RESTful APIs, and enterprise-level solutions. Proficient in both frontend and backend technologies with a strong foundation in object-oriented programming and modern development practices.",
     location: "Sonbhadra, Uttar Pradesh",
     email: "dwivedimahendra9876@gmail.com",
     phone: "+91 9580187515",
