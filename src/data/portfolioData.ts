@@ -77,8 +77,8 @@ export const portfolioData: PortfolioData = {
     profileImage: "/lovable-uploads/7b88955d-8e68-42ad-ad8c-3891fb6682ce.png"
   },
   hero: {
-    title: "Full Stack Developer & Problem Solver",
-    subtitle: "Passionate about creating innovative web solutions and solving complex problems. Currently pursuing B.Tech in Computer Science Engineering with hands-on experience in modern web technologies.",
+    title: "Software Developer & Problem Solver",
+    subtitle: "Experienced Software Developer with expertise in Java and full stack development using the MERN stack. Passionate about creating innovative web solutions and solving complex problems. Currently pursuing B.Tech in Computer Science Engineering with hands-on experience in building scalable applications and modern web technologies.",
     socialLinks: [
       { name: "GitHub", url: "https://github.com/MahendraDwivedi" },
       { name: "LinkedIn", url: "https://www.linkedin.com/in/mahendra-dwivedi-a35132249/" },
