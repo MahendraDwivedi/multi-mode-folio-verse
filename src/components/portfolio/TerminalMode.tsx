@@ -93,6 +93,7 @@ Type 'help' to see available commands or use the buttons below.
     { command: 'hire whatsapp', description: 'Open WhatsApp for job discussions' },
     { command: 'help', description: 'Show this help message' },
     { command: 'clear', description: 'Clear terminal screen' },
+    { command: 'download resume', description: 'Download resume PDF' },
   ];
 
   const openWhatsApp = () => {
@@ -132,6 +133,16 @@ ${commands.map(c => `  ${c.command.padEnd(20)} - ${c.description}`).join('\n')}`
       case 'hire whatsapp':
         output = 'Opening WhatsApp chat for job discussions...';
         openWhatsApp();
+        break;
+
+      case 'download resume':
+        output = 'Downloading resume PDF...';
+        const link = document.createElement('a');
+        link.href = '/Mahendra_Kumar_Dwivedi_Resume.pdf';
+        link.download = 'Mahendra_Kumar_Dwivedi_Resume.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
         break;
 
       case 'show hire':
@@ -383,6 +394,13 @@ ${portfolioData.contact.website ? `Website: ${portfolioData.contact.website}` : 
             onClick={() => handleCommandClick('hire whatsapp')}
           >
             hire whatsapp
+          </Button>
+          <Button
+            variant="outline"
+            className="bg-black/40 border-blue-500/30 text-blue-400 hover:bg-blue-500/10 hover:border-blue-400 transition-all font-mono text-sm"
+            onClick={() => handleCommandClick('download resume')}
+          >
+            download resume
           </Button>
         </div>
       </div>

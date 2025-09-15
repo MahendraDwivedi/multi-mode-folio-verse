@@ -116,8 +116,8 @@ const GUIMode = () => {
 
   const downloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/lovable-uploads/7b88955d-8e68-42ad-ad8c-3891fb6682ce.png';
-    link.download = 'Mahendra_Kumar_Dwivedi_Resume.png';
+    link.href = '/Mahendra_Kumar_Dwivedi_Resume.pdf';
+    link.download = 'Mahendra_Kumar_Dwivedi_Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
