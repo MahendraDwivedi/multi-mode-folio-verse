@@ -69,8 +69,8 @@ export interface PortfolioData {
 export const portfolioData: PortfolioData = {
   about: {
     name: "Mahendra Kumar Dwivedi",
-    title: "Software Developer | Java Expert | Full Stack MERN Developer",
-    description: "Experienced Software Developer with expertise in Java and full stack development using the MERN stack (MongoDB, Express.js, React, Node.js). Currently pursuing B.Tech in Computer Science Engineering with hands-on experience in building scalable web applications, RESTful APIs, and enterprise-level solutions. Proficient in both frontend and backend technologies with a strong foundation in object-oriented programming and modern development practices.",
+    title: "Software Developer | Java Developer | Full Stack MERN Developer",
+    description: "Aspiring Software Developer with expertise in Java and full stack development using the MERN stack (MongoDB, Express.js, React, Node.js). Currently pursuing B.Tech in Computer Science Engineering with hands-on experience in building scalable web applications, RESTful APIs, and enterprise-level solutions. Proficient in both frontend and backend technologies with a strong foundation in object-oriented programming and modern development practices.",
     location: "Sonbhadra, Uttar Pradesh",
     email: "dwivedimahendra9876@gmail.com",
     phone: "+91 9580187515",
@@ -78,7 +78,7 @@ export const portfolioData: PortfolioData = {
   },
   hero: {
     title: "Software Developer & Problem Solver",
-    subtitle: "Experienced Software Developer with expertise in Java and full stack development using the MERN stack. Passionate about creating innovative web solutions and solving complex problems. Currently pursuing B.Tech in Computer Science Engineering with hands-on experience in building scalable applications and modern web technologies.",
+    subtitle: "Aspiring Software Developer with expertise in Java and full stack development using the MERN stack. Passionate about creating innovative web solutions and solving complex problems. Currently pursuing B.Tech in Computer Science Engineering with hands-on experience in building scalable applications and modern web technologies.",
     socialLinks: [
       { name: "GitHub", url: "https://github.com/MahendraDwivedi" },
       { name: "LinkedIn", url: "https://www.linkedin.com/in/mahendra-dwivedi-a35132249/" },
