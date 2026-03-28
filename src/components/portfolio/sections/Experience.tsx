@@ -19,10 +19,7 @@ const Experience = () => {
                     <p className="text-muted-foreground">{exp.company}</p>
                   </div>
                   <div className="text-right">
-                    <Badge variant={exp.type === 'job' ? 'default' : 'secondary'}>
-                      {exp.type}
-                    </Badge>
-                    <p className="text-sm text-muted-foreground mt-1">{exp.duration}</p>
+                    <p className="text-sm text-muted-foreground">{exp.duration}</p>
                   </div>
                 </div>
               </CardHeader>
