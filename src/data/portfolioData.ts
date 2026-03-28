@@ -211,7 +211,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "College Website Maintenance Team",
       company: "Rajkiya Engineering College, Sonbhadra",
-      duration: "2024 - Present",
+      duration: "2023 - 2025",
       description: [
         "Part of the college website maintenance team responsible for updates and upkeep",
         "Collaborated with faculty and team members to ensure website content accuracy",
