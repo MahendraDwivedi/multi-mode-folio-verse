@@ -72,7 +72,7 @@ export const portfolioData: PortfolioData = {
     title: "Software Developer | Java Developer | Full Stack MERN Developer",
     description: "Aspiring Software Developer with expertise in Java and full stack development using the MERN stack (MongoDB, Express.js, React, Node.js). Currently pursuing B.Tech in Computer Science Engineering with hands-on experience in building scalable web applications, RESTful APIs, and enterprise-level solutions. Proficient in both frontend and backend technologies with a strong foundation in object-oriented programming and modern development practices.",
     location: "Sonbhadra, Uttar Pradesh",
-    email: "dwivedimahendra9876@gmail.com",
+    email: "dmahendra0707@gmail.com",
     phone: "+91 9580187515",
     profileImage: "/lovable-uploads/7b88955d-8e68-42ad-ad8c-3891fb6682ce.png"
   },
