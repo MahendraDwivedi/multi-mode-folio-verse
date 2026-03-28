@@ -196,6 +196,18 @@ export const portfolioData: PortfolioData = {
   ],
   experience: [
     {
+      title: "Full Stack Developer",
+      company: "ZCROM Technologies",
+      duration: "2025 - 2026",
+      description: [
+        "Developed Careerdastak, a platform providing daily government job notifications, exam dates, admit cards, results, and syllabus updates",
+        "Built user dashboards enabling open blog posting for job updates, preparation resources, and guidance content",
+        "Implemented verified content workflows, real-time alerts, and easy-to-navigate career guidance features",
+        "Developed scalable REST APIs using Node.js/Express and a responsive React frontend with MongoDB"
+      ],
+      type: "job"
+    },
+    {
       title: "Web Development Projects",
       company: "Personal Projects",
       duration: "2022 - Present",
