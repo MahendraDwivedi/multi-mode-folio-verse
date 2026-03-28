@@ -31,7 +31,7 @@ const Projects = () => {
                     <Button size="sm" variant="outline" asChild>
                       <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                         <Github className="w-4 h-4 mr-2" />
-                        Code
+                        {project.title.includes('AgroStack') ? 'Frontend' : 'Code'}
                       </a>
                     </Button>
                   )}
@@ -39,7 +39,7 @@ const Projects = () => {
                     <Button size="sm" asChild>
                       <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="w-4 h-4 mr-2" />
-                        Live Demo
+                        {project.title.includes('AgroStack') ? 'Backend' : 'Live Demo'}
                       </a>
                     </Button>
                   )}
