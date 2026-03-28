@@ -72,7 +72,7 @@ export const portfolioData: PortfolioData = {
     title: "Software Developer | Java Developer | Full Stack MERN Developer",
     description: "Aspiring Software Developer with expertise in Java and full stack development using the MERN stack (MongoDB, Express.js, React, Node.js). Currently pursuing B.Tech in Computer Science Engineering with hands-on experience in building scalable web applications, RESTful APIs, and enterprise-level solutions. Proficient in both frontend and backend technologies with a strong foundation in object-oriented programming and modern development practices.",
     location: "Sonbhadra, Uttar Pradesh",
-    email: "dwivedimahendra9876@gmail.com",
+    email: "dmahendra0707@gmail.com",
     phone: "+91 9580187515",
     profileImage: "/lovable-uploads/7b88955d-8e68-42ad-ad8c-3891fb6682ce.png"
   },
@@ -89,7 +89,7 @@ export const portfolioData: PortfolioData = {
     {
       degree: "B.Tech in Computer Science and Engineering",
       institution: "Rajkiya Engineering College, Sonbhadra",
-      year: "2022-2026 (Currently 6th Semester)",
+      year: "2022-2026 (Currently 8th Semester)",
       grade: "7.5 CGPA (Current)",
       achievements: ["Consistent Academic Performance", "Active in Technical Events", "Web Development Projects"]
     },
@@ -124,8 +124,8 @@ export const portfolioData: PortfolioData = {
       "Node.js", "Spring Boot", "Java", "Spring Framework", "Spring MVC", "Spring Data JPA", "Hibernate", "Maven", "RESTful APIs", "Microservices"
     ],
     databases: ["MySQL", "MongoDB", "Firebase", "PostgreSQL", "JDBC"],
-    os: ["Debian", "Ubuntu", "Windows"],
-    otherTools: ["Postman", "Git", "Vite", "IntelliJ IDEA", "Eclipse", "VS Code", "JUnit", "Mockito"]
+    os: ["Debian", "Ubuntu", "Mint", "Windows"],
+    otherTools: ["Postman", "Git", "Vite", "IntelliJ IDEA", "Eclipse", "VS Code", "JUnit", "Mockito", "Docker", "Maven"]
   },
   projects: [
     {
@@ -153,6 +153,20 @@ export const portfolioData: PortfolioData = {
       githubUrl: "https://github.com/MahendraDwivedi/PrimeDrive2.0",
       demoUrl: "https://primedrive-lake.vercel.app/",
       image: "photo-1449824913935-59a10b8d2000"
+    },
+    {
+      title: "AI Email Reply Generator",
+      description: "Built a Chrome extension adding an 'AI Reply' button in Gmail that auto-generates context-aware responses via Gemini API. Developed a secure Spring Boot REST API backend and React interface for testing and managing AI prompts. Integrated extension scripts with Gmail's DOM for seamless UI interaction and message extraction. Optimized API response time using asynchronous REST calls and caching mechanisms.",
+      techStack: ["Java", "Spring Boot", "React", "Chrome Extension", "Google Gemini API"],
+      githubUrl: "https://github.com/MahendraDwivedi",
+      image: "photo-1526374965328-7f61d4dc18c5"
+    },
+    {
+      title: "AgroStack-Inspired Community Q&A Platform",
+      description: "Built a StackOverflow-like Q&A platform with role-based dashboards for User, Expert, and Admin. Implemented ask/answer workflows, voting, expert verification, and content moderation. Integrated an AI chatbot for instant query assistance and intelligent suggestions. Developed secure REST APIs using Spring Boot and a responsive React frontend.",
+      techStack: ["Spring Boot", "React", "MongoDB", "AI Chatbot"],
+      githubUrl: "https://github.com/MahendraDwivedi",
+      image: "photo-1516321318423-f06f85e504b3"
     }
   ],
   certifications: [
@@ -173,9 +187,26 @@ export const portfolioData: PortfolioData = {
       issuer: "Deloitte",
       year: "2025",
       credentialId: "2raWSqLZJ3AgK6nNv"
+    },
+    {
+      name: "Java Foundation Badge",
+      issuer: "Oracle University",
+      year: "2025"
     }
   ],
   experience: [
+    {
+      title: "Full Stack Developer",
+      company: "ZCROM Technologies",
+      duration: "2025 - 2026",
+      description: [
+        "Developed Careerdastak, a platform providing daily government job notifications, exam dates, admit cards, results, and syllabus updates",
+        "Built user dashboards enabling open blog posting for job updates, preparation resources, and guidance content",
+        "Implemented verified content workflows, real-time alerts, and easy-to-navigate career guidance features",
+        "Developed scalable REST APIs using Node.js/Express and a responsive React frontend with MongoDB"
+      ],
+      type: "job"
+    },
     {
       title: "Web Development Projects",
       company: "Personal Projects",
@@ -190,12 +221,13 @@ export const portfolioData: PortfolioData = {
     }
   ],
   achievements: [
+    "1st position in Software category during internal hackathon for SIH 2025",
     "Achieved the leetcode rating of 1636",
     "Secured a contest rank of 1448 on Leetcode weekly contest 446",
     "Solved over 1000 problems on various coding platforms such as Leetcode, GFG, Coding Ninjas etc."
   ],
   contact: {
-    email: "dwivedimahendra9876@gmail.com",
+    email: "dmahendra0707@gmail.com",
     phone: "+91 9580187515",
     linkedin: "https://www.linkedin.com/in/mahendra-dwivedi-a35132249/",
     github: "https://github.com/MahendraDwivedi",
