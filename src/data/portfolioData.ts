@@ -71,10 +71,10 @@ export const portfolioData: PortfolioData = {
     name: "Mahendra Kumar Dwivedi",
     title: "Software Developer | Java Developer | Full Stack MERN Developer",
     description: "Aspiring Software Developer with expertise in Java and full stack development using the MERN stack (MongoDB, Express.js, React, Node.js). Currently pursuing B.Tech in Computer Science Engineering with hands-on experience in building scalable web applications, RESTful APIs, and enterprise-level solutions. Proficient in both frontend and backend technologies with a strong foundation in object-oriented programming and modern development practices.",
-    location: "Sonbhadra, Uttar Pradesh",
+    location: "Gonda, Uttar Pradesh",
     email: "dmahendra0707@gmail.com",
     phone: "+91 9580187515",
-    profileImage: "/lovable-uploads/7b88955d-8e68-42ad-ad8c-3891fb6682ce.png"
+    profileImage: "/profile-photo.jpeg"
   },
   hero: {
     title: "Software Developer & Problem Solver",
@@ -158,14 +158,15 @@ export const portfolioData: PortfolioData = {
       title: "AI Email Reply Generator",
       description: "Built a Chrome extension adding an 'AI Reply' button in Gmail that auto-generates context-aware responses via Gemini API. Developed a secure Spring Boot REST API backend and React interface for testing and managing AI prompts. Integrated extension scripts with Gmail's DOM for seamless UI interaction and message extraction. Optimized API response time using asynchronous REST calls and caching mechanisms.",
       techStack: ["Java", "Spring Boot", "React", "Chrome Extension", "Google Gemini API"],
-      githubUrl: "https://github.com/MahendraDwivedi",
+      githubUrl: "https://github.com/MahendraDwivedi/Email_Response_Generator",
       image: "photo-1526374965328-7f61d4dc18c5"
     },
     {
       title: "AgroStack-Inspired Community Q&A Platform",
       description: "Built a StackOverflow-like Q&A platform with role-based dashboards for User, Expert, and Admin. Implemented ask/answer workflows, voting, expert verification, and content moderation. Integrated an AI chatbot for instant query assistance and intelligent suggestions. Developed secure REST APIs using Spring Boot and a responsive React frontend.",
       techStack: ["Spring Boot", "React", "MongoDB", "AI Chatbot"],
-      githubUrl: "https://github.com/MahendraDwivedi",
+      githubUrl: "https://github.com/MahendraDwivedi/AgroStackFrontend",
+      demoUrl: "https://github.com/MahendraDwivedi/AgroStackBackend",
       image: "photo-1516321318423-f06f85e504b3"
     }
   ],
@@ -196,7 +197,7 @@ export const portfolioData: PortfolioData = {
   ],
   experience: [
     {
-      title: "Full Stack Developer",
+      title: "Full Stack Developer Intern",
       company: "ZCROM Technologies",
       duration: "2025 - 2026",
       description: [
@@ -204,6 +205,17 @@ export const portfolioData: PortfolioData = {
         "Built user dashboards enabling open blog posting for job updates, preparation resources, and guidance content",
         "Implemented verified content workflows, real-time alerts, and easy-to-navigate career guidance features",
         "Developed scalable REST APIs using Node.js/Express and a responsive React frontend with MongoDB"
+      ],
+      type: "internship"
+    },
+    {
+      title: "College Website Maintenance Team",
+      company: "Rajkiya Engineering College, Sonbhadra",
+      duration: "2024 - Present",
+      description: [
+        "Part of the college website maintenance team responsible for updates and upkeep",
+        "Collaborated with faculty and team members to ensure website content accuracy",
+        "Assisted in troubleshooting and resolving website issues"
       ],
       type: "job"
     },
