@@ -227,7 +227,7 @@ export const portfolioData: PortfolioData = {
     "Solved over 1000 problems on various coding platforms such as Leetcode, GFG, Coding Ninjas etc."
   ],
   contact: {
-    email: "dwivedimahendra9876@gmail.com",
+    email: "dmahendra0707@gmail.com",
     phone: "+91 9580187515",
     linkedin: "https://www.linkedin.com/in/mahendra-dwivedi-a35132249/",
     github: "https://github.com/MahendraDwivedi",
