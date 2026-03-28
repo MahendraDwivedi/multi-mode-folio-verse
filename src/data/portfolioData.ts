@@ -124,8 +124,8 @@ export const portfolioData: PortfolioData = {
       "Node.js", "Spring Boot", "Java", "Spring Framework", "Spring MVC", "Spring Data JPA", "Hibernate", "Maven", "RESTful APIs", "Microservices"
     ],
     databases: ["MySQL", "MongoDB", "Firebase", "PostgreSQL", "JDBC"],
-    os: ["Debian", "Ubuntu", "Windows"],
-    otherTools: ["Postman", "Git", "Vite", "IntelliJ IDEA", "Eclipse", "VS Code", "JUnit", "Mockito"]
+    os: ["Debian", "Ubuntu", "Mint", "Windows"],
+    otherTools: ["Postman", "Git", "Vite", "IntelliJ IDEA", "Eclipse", "VS Code", "JUnit", "Mockito", "Docker", "Maven"]
   },
   projects: [
     {
