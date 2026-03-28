@@ -165,7 +165,8 @@ export const portfolioData: PortfolioData = {
       title: "AgroStack-Inspired Community Q&A Platform",
       description: "Built a StackOverflow-like Q&A platform with role-based dashboards for User, Expert, and Admin. Implemented ask/answer workflows, voting, expert verification, and content moderation. Integrated an AI chatbot for instant query assistance and intelligent suggestions. Developed secure REST APIs using Spring Boot and a responsive React frontend.",
       techStack: ["Spring Boot", "React", "MongoDB", "AI Chatbot"],
-      githubUrl: "https://github.com/MahendraDwivedi",
+      githubUrl: "https://github.com/MahendraDwivedi/AgroStackFrontend",
+      demoUrl: "https://github.com/MahendraDwivedi/AgroStackBackend",
       image: "photo-1516321318423-f06f85e504b3"
     }
   ],
