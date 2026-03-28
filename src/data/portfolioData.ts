@@ -197,7 +197,7 @@ export const portfolioData: PortfolioData = {
   ],
   experience: [
     {
-      title: "Full Stack Developer",
+      title: "Full Stack Developer Intern",
       company: "ZCROM Technologies",
       duration: "2025 - 2026",
       description: [
@@ -205,6 +205,17 @@ export const portfolioData: PortfolioData = {
         "Built user dashboards enabling open blog posting for job updates, preparation resources, and guidance content",
         "Implemented verified content workflows, real-time alerts, and easy-to-navigate career guidance features",
         "Developed scalable REST APIs using Node.js/Express and a responsive React frontend with MongoDB"
+      ],
+      type: "internship"
+    },
+    {
+      title: "College Website Maintenance Team",
+      company: "Rajkiya Engineering College, Sonbhadra",
+      duration: "2024 - Present",
+      description: [
+        "Part of the college website maintenance team responsible for updates and upkeep",
+        "Collaborated with faculty and team members to ensure website content accuracy",
+        "Assisted in troubleshooting and resolving website issues"
       ],
       type: "job"
     },
