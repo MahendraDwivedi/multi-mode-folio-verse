@@ -187,6 +187,11 @@ export const portfolioData: PortfolioData = {
       issuer: "Deloitte",
       year: "2025",
       credentialId: "2raWSqLZJ3AgK6nNv"
+    },
+    {
+      name: "Java Foundation Badge",
+      issuer: "Oracle University",
+      year: "2025"
     }
   ],
   experience: [
