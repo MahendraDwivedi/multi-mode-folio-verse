@@ -221,6 +221,7 @@ export const portfolioData: PortfolioData = {
     }
   ],
   achievements: [
+    "1st position in Software category during internal hackathon for SIH 2025",
     "Achieved the leetcode rating of 1636",
     "Secured a contest rank of 1448 on Leetcode weekly contest 446",
     "Solved over 1000 problems on various coding platforms such as Leetcode, GFG, Coding Ninjas etc."
