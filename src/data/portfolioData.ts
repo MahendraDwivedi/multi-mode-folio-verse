@@ -158,7 +158,7 @@ export const portfolioData: PortfolioData = {
       title: "AI Email Reply Generator",
       description: "Built a Chrome extension adding an 'AI Reply' button in Gmail that auto-generates context-aware responses via Gemini API. Developed a secure Spring Boot REST API backend and React interface for testing and managing AI prompts. Integrated extension scripts with Gmail's DOM for seamless UI interaction and message extraction. Optimized API response time using asynchronous REST calls and caching mechanisms.",
       techStack: ["Java", "Spring Boot", "React", "Chrome Extension", "Google Gemini API"],
-      githubUrl: "https://github.com/MahendraDwivedi",
+      githubUrl: "https://github.com/MahendraDwivedi/Email_Response_Generator",
       image: "photo-1526374965328-7f61d4dc18c5"
     },
     {
