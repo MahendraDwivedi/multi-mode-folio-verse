@@ -89,7 +89,7 @@ export const portfolioData: PortfolioData = {
     {
       degree: "B.Tech in Computer Science and Engineering",
       institution: "Rajkiya Engineering College, Sonbhadra",
-      year: "2022-2026 (Currently 6th Semester)",
+      year: "2022-2026 (Currently 8th Semester)",
       grade: "7.5 CGPA (Current)",
       achievements: ["Consistent Academic Performance", "Active in Technical Events", "Web Development Projects"]
     },
