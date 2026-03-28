@@ -153,6 +153,20 @@ export const portfolioData: PortfolioData = {
       githubUrl: "https://github.com/MahendraDwivedi/PrimeDrive2.0",
       demoUrl: "https://primedrive-lake.vercel.app/",
       image: "photo-1449824913935-59a10b8d2000"
+    },
+    {
+      title: "AI Email Reply Generator",
+      description: "Built a Chrome extension adding an 'AI Reply' button in Gmail that auto-generates context-aware responses via Gemini API. Developed a secure Spring Boot REST API backend and React interface for testing and managing AI prompts. Integrated extension scripts with Gmail's DOM for seamless UI interaction and message extraction. Optimized API response time using asynchronous REST calls and caching mechanisms.",
+      techStack: ["Java", "Spring Boot", "React", "Chrome Extension", "Google Gemini API"],
+      githubUrl: "https://github.com/MahendraDwivedi",
+      image: "photo-1526374965328-7f61d4dc18c5"
+    },
+    {
+      title: "AgroStack-Inspired Community Q&A Platform",
+      description: "Built a StackOverflow-like Q&A platform with role-based dashboards for User, Expert, and Admin. Implemented ask/answer workflows, voting, expert verification, and content moderation. Integrated an AI chatbot for instant query assistance and intelligent suggestions. Developed secure REST APIs using Spring Boot and a responsive React frontend.",
+      techStack: ["Spring Boot", "React", "MongoDB", "AI Chatbot"],
+      githubUrl: "https://github.com/MahendraDwivedi",
+      image: "photo-1516321318423-f06f85e504b3"
     }
   ],
   certifications: [
